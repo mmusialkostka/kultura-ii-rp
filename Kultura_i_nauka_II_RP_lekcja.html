@@ -286,7 +286,8 @@
   body.student .topbar nav, body.student #fsBtn { display: none; }
   .st { max-width: 680px; margin: 0 auto; }
   .st h2 { font-size: 36px; margin: 8px 0; }
-  .st .q-text { font-size: 25px; }
+  /* na telefonie Bodoni (cienkie kreski) jest nieczytelny — pytania w kroju tekstowym */
+  .st .q-text { font-family: var(--serif); font-weight: 600; font-size: 21px; line-height: 1.38; }
   .st .choice { width: 100%; margin-bottom: 8px; font-size: 18px; }
   .st .choice.chosen { background: var(--ink); color: #f6efdf; border-color: var(--ink); }
   .st-choices.tf { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
@@ -345,7 +346,7 @@
   <div class="row">
     <div class="brand" title="Kultura i nauka II RP">
       <svg viewBox="0 0 40 40" aria-hidden="true"><rect x="1" y="1" width="38" height="38" fill="none" stroke="#d8b46a"/><path d="M20 6 L20 34 M8 30 L20 10 L32 30" fill="none" stroke="#d8b46a" stroke-width="1.6"/><path d="M6 34 H34" stroke="#c0392b" stroke-width="2.4"/></svg>
-      II RP · <span>Kultura i nauka</span>
+      II RP<span> · Kultura i nauka</span>
     </div>
     <nav class="tabs" id="tabs"></nav>
     <button class="icon-btn" id="fsBtn" title="Pełny ekran">⛶ Pełny ekran</button>
