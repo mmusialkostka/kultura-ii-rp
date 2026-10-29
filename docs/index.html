@@ -195,9 +195,12 @@
   .art:hover .img img { transform: scale(1.04); }
   .art .ask { font-family: var(--sans); font-size: 15px; margin: 12px 0 8px; }
   .art .opts { display: flex; gap: 6px; flex-wrap: wrap; }
-  .art .opts button { background: var(--card); border: 1px solid #b9ad95; padding: 6px 12px; font-family: var(--sans); font-size: 14.5px; }
-  .art .opts button.ok { background: var(--ok); color: #fff; border-color: var(--ok); }
-  .art .opts button.bad { background: var(--bad); color: #fff; border-color: var(--bad); }
+  .art .opts button, .book .opts button { background: var(--card); border: 1px solid #b9ad95; padding: 6px 12px; font-family: var(--sans); font-size: 14.5px; }
+  .book .opts { display: grid; gap: 6px; }
+  .book .opts button { text-align: left; padding: 9px 14px; font-size: 16px; }
+  .book .opts button:hover:not(:disabled) { border-color: var(--ink); }
+  .art .opts button.ok, .book .opts button.ok { background: var(--ok); color: #fff; border-color: var(--ok); }
+  .art .opts button.bad, .book .opts button.bad { background: var(--bad); color: #fff; border-color: var(--bad); }
   .art .exp { font-size: 16px; margin-top: 10px; display: none; }
   .art.done .exp { display: block; }
   .people { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 14px; margin-top: 26px; }
@@ -503,12 +506,13 @@
   <section class="panel" data-label="Literatura" data-min="7 min">
     <div class="head">
       <div><div class="kicker">Etap 4 · Biblioteka dwudziestolecia</div><h2>Półka z książkami</h2>
-      <p class="lead">Kliknij grzbiet książki. Kolor oznacza nurt — zanim przeczytasz opis, spróbujcie odgadnąć, do którego należy.</p></div>
+      <p class="lead">Kliknij grzbiet książki i zgadnijcie, do którego nurtu należy. Po odpowiedzi grzbiet przybierze kolor swojego nurtu — na koniec cała półka ułoży się w mapę literatury dwudziestolecia.</p></div>
+      <div class="btns"><button class="btn" id="shelfAll">Pokaż wszystkie nurty</button><button class="btn" id="shelfReset">Od nowa</button></div>
     </div>
     <div class="lit-layout">
       <div>
         <div class="shelf-wrap"><div class="shelf" id="shelf"></div></div>
-        <div class="legend" id="legend"></div>
+        <div class="legend" id="legend" hidden></div>
       </div>
       <div class="card deco-c" id="bookView"><div class="empty-book">Wybierz książkę z półki.</div></div>
     </div>
@@ -633,6 +637,7 @@ const NURTY = {
   pop: ["Literatura popularna", "#a8843a"],
   poez: ["Poezja", "#5a3a5e"]
 };
+const LEATHER = ["#4a3526", "#3c302a", "#5b4430", "#2f2a24", "#54392b", "#433a2c", "#3a2b22"];
 const BOOKS = [
   { t: "Chłopi", a: "Władysław Reymont", y: "1904–1909 · Nobel 1924", n: "real", img: "reymont", h: 330, d: "Epopeja o życiu wsi Lipce, ułożona według rytmu pór roku. Za tę powieść Reymont otrzymał w <b>1924 r. Nagrodę Nobla</b> — drugą w historii polskiej literatury po Sienkiewiczu." },
   { t: "Przedwiośnie", a: "Stefan Żeromski", y: "1924", n: "real", img: "zeromski", h: 290, d: "Powieść o młodym Cezarym Baryce, który przyjeżdża do odrodzonej Polski i zderza się z jej problemami. Żeromski, uważany za „sumienie narodu”, był w pierwszych latach niepodległości najpopularniejszym pisarzem." },
@@ -1219,20 +1224,42 @@ function initScience() {
 }
 
 /* ---------- Literatura ---------- */
+/* Grzbiety są najpierw w kolorach skóry (LEATHER), by nie zdradzać nurtu; kolor nurtu pojawia się po odpowiedzi. */
 function initBooks() {
-  const shelf = $("#shelf"), view = $("#bookView");
-  $("#legend").innerHTML = Object.values(NURTY).map(([n, c]) => `<span><i style="background:${c}"></i>${n}</span>`).join("");
+  const shelf = $("#shelf"), view = $("#bookView"), legend = $("#legend");
+  const known = new Set(), spines = [];
+  legend.innerHTML = Object.values(NURTY).map(([n, c]) => `<span><i style="background:${c}"></i>${n}</span>`).join("");
+  const paint = (i) => {
+    const b = BOOKS[i], s = spines[i], [, col] = NURTY[b.n], lt = LEATHER[i % LEATHER.length];
+    const c = known.has(i) ? col : lt;
+    s.style.background = `linear-gradient(90deg, ${c}, ${c}dd 60%, ${c})`;
+    s.style.color = known.has(i) && b.n === "pop" ? "#1a1006" : known.has(i) ? "#f4ead3" : "#e3cf9c";
+    legend.hidden = known.size < BOOKS.length;
+  };
+  const show = (i) => {
+    const b = BOOKS[i], [nurt, col] = NURTY[b.n], k = known.has(i);
+    spines.forEach((x, j) => x.classList.toggle("on", j === i));
+    const cover = b.img ? `<img src="obrazy/${b.img}.jpg" alt="">`
+      : `<div style="width:170px;height:230px;background:${k ? col : LEATHER[i % LEATHER.length]};display:grid;place-items:center;color:#f4ead3;font-family:var(--display);font-size:22px;text-align:center;padding:10px">${esc(b.t)}</div>`;
+    view.innerHTML = `<div class="book">${cover}<div>
+      ${k ? `<span class="tag" style="color:${col}">${nurt}</span>` : ""}<h3>${esc(b.t)}</h3><div class="au">${esc(b.a)} · ${esc(b.y)}</div>
+      ${k ? `<p>${b.d}</p>` : `<div class="ask" style="font-family:var(--sans);font-size:15px;margin:16px 0 8px">Do jakiego nurtu należy?</div>
+        <div class="opts">${Object.entries(NURTY).map(([key, [n]]) => `<button data-k="${key}">${n}</button>`).join("")}</div>`}
+    </div></div>`;
+    view.querySelectorAll(".opts button").forEach(btn => btn.onclick = () => {
+      view.querySelectorAll(".opts button").forEach(x => { x.disabled = true; if (x.dataset.k === b.n) x.classList.add("ok"); else if (x === btn) x.classList.add("bad"); });
+      known.add(i); paint(i);
+      setTimeout(() => { if (spines[i].classList.contains("on")) show(i); }, 1100);
+    });
+  };
   BOOKS.forEach((b, i) => {
-    const [, col] = NURTY[b.n];
     const s = el("button", "spine", `<span>${esc(b.t)}</span><small>${esc(b.a.split(",")[0].split(" ").slice(-1)[0])}</small>`);
-    s.style.height = b.h + "px"; s.style.background = `linear-gradient(90deg, ${col}, ${col}dd 60%, ${col})`; s.style.color = b.n === "pop" ? "#1a1006" : "#f4ead3";
-    s.onclick = () => {
-      shelf.querySelectorAll(".spine").forEach(x => x.classList.toggle("on", x === s));
-      view.innerHTML = `<div class="book">${b.img ? `<img src="obrazy/${b.img}.jpg" alt="">` : `<div style="width:170px;height:230px;background:${col};display:grid;place-items:center;color:#f4ead3;font-family:var(--display);font-size:22px;text-align:center;padding:10px">${esc(b.t)}</div>`}
-        <div><span class="tag" style="color:${col}">${NURTY[b.n][0]}</span><h3>${esc(b.t)}</h3><div class="au">${esc(b.a)} · ${esc(b.y)}</div><p>${b.d}</p></div></div>`;
-    };
-    shelf.appendChild(s);
+    s.style.height = b.h + "px";
+    s.onclick = () => show(i);
+    spines.push(s); shelf.appendChild(s); paint(i);
   });
+  $("#shelfAll").onclick = () => { BOOKS.forEach((_, i) => { known.add(i); paint(i); }); const on = spines.findIndex(x => x.classList.contains("on")); if (on >= 0) show(on); };
+  $("#shelfReset").onclick = () => { known.clear(); BOOKS.forEach((_, i) => paint(i)); spines.forEach(x => x.classList.remove("on")); view.innerHTML = `<div class="empty-book">Wybierz książkę z półki.</div>`; };
 }
 
 /* ---------- Sztuka ---------- */
