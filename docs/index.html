@@ -1,0 +1,1306 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kultura i nauka II Rzeczypospolitej</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,500;0,6..96,600;0,6..96,700;1,6..96,500&family=Jost:wght@400;500;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<style>
+  :root {
+    --paper: #f3ede1; --paper-2: #ebe3d2; --card: #fbf8f1;
+    --ink: #1a1814; --muted: #6a6356; --line: rgba(26,24,20,.14);
+    --red: #9b1c1c; --red-2: #c0392b; --gold: #a8843a; --gold-hi: #d8b46a; --navy: #1d2e44;
+    --ok: #2f6b3a; --bad: #a3241f;
+    --display: "Bodoni Moda", "Didot", Georgia, serif;
+    --sans: "Jost", "Futura", "Century Gothic", system-ui, sans-serif;
+    --serif: "Source Serif 4", Georgia, serif;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--serif); font-size: 19px; line-height: 1.55;
+    background-image: radial-gradient(rgba(120,95,50,.07) 1px, transparent 1px); background-size: 4px 4px; }
+  img { max-width: 100%; display: block; }
+  button { font: inherit; color: inherit; cursor: pointer; }
+  h1, h2, h3 { font-family: var(--display); font-weight: 600; line-height: 1.08; margin: 0; }
+  h2 { font-size: clamp(34px, 3.4vw, 52px); }
+  h3 { font-size: 24px; }
+  b, strong { font-weight: 600; }
+
+  /* ---------- topbar ---------- */
+  .topbar { position: sticky; top: 0; z-index: 20; background: #14120e; color: #f3ead6; }
+  .topbar .row { display: flex; align-items: center; gap: 22px; padding: 10px 28px; max-width: 1500px; margin: 0 auto; }
+  .brand { display: flex; align-items: center; gap: 12px; font-family: var(--display); font-weight: 600; font-size: 19px; white-space: nowrap; cursor: default; user-select: none; }
+  .brand svg { width: 30px; height: 30px; flex: none; }
+  .brand span { color: var(--gold-hi); font-style: italic; font-weight: 500; }
+  .tabs { display: flex; gap: 2px; overflow-x: auto; flex: 1; scrollbar-width: none; }
+  .tabs::-webkit-scrollbar { display: none; }
+  .tabs button { background: none; border: 0; padding: 9px 13px; font-family: var(--sans); font-size: 14.5px; letter-spacing: .04em; color: #bfb39a; white-space: nowrap; border-bottom: 2px solid transparent; }
+  .tabs button b { font-weight: 600; color: var(--gold-hi); margin-right: 7px; }
+  .tabs button:hover { color: #fff; }
+  .tabs button.active { color: #fff; border-bottom-color: var(--gold-hi); }
+  .icon-btn { background: none; border: 1px solid #4a4233; color: #e6d7b5; padding: 7px 14px; font-family: var(--sans); font-size: 14px; letter-spacing: .04em; white-space: nowrap; }
+  .icon-btn:hover { border-color: var(--gold-hi); color: #fff; }
+  .deco { height: 14px; background:
+      linear-gradient(135deg, var(--gold) 25%, transparent 25%) -7px 0/14px 14px,
+      linear-gradient(225deg, var(--gold) 25%, transparent 25%) -7px 0/14px 14px, #14120e; opacity: .9; }
+
+  main { max-width: 1500px; margin: 0 auto; padding: 34px 28px 70px; }
+  .panel { display: none; animation: fade .45s ease; }
+  .panel.active { display: block; }
+  @keyframes fade { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+  .head { display: flex; justify-content: space-between; align-items: flex-end; gap: 30px; margin-bottom: 26px; padding-bottom: 18px; border-bottom: 1px solid var(--line); }
+  .kicker { font-family: var(--sans); font-size: 13.5px; letter-spacing: .22em; text-transform: uppercase; color: var(--red); font-weight: 500; }
+  .head .kicker { margin-bottom: 10px; }
+  .lead { font-size: 21px; color: #39342b; max-width: 900px; margin: 12px 0 0; }
+  .muted { color: var(--muted); }
+  .card { background: var(--card); border: 1px solid var(--line); padding: 22px 24px; position: relative; }
+  .card.deco-c::before, .card.deco-c::after { content: ""; position: absolute; width: 16px; height: 16px; border: 2px solid var(--gold); }
+  .card.deco-c::before { left: 6px; top: 6px; border-right: 0; border-bottom: 0; }
+  .card.deco-c::after { right: 6px; bottom: 6px; border-left: 0; border-top: 0; }
+  .btn { background: var(--card); border: 1px solid #b9ad95; padding: 10px 18px; font-family: var(--sans); font-size: 15.5px; letter-spacing: .03em; transition: background .2s, border-color .2s; }
+  .btn:hover:not(:disabled) { border-color: var(--ink); }
+  .btn.primary { background: var(--ink); color: #f6efdf; border-color: var(--ink); }
+  .btn.primary:hover:not(:disabled) { background: #000; }
+  .btn:disabled { opacity: .4; cursor: default; }
+  .btns { display: flex; gap: 10px; flex-wrap: wrap; }
+  .note { background: #f6efd9; border-left: 4px solid var(--gold); padding: 14px 18px; font-size: 17.5px; }
+  .tag { display: inline-block; font-family: var(--sans); font-size: 12.5px; letter-spacing: .12em; text-transform: uppercase; padding: 3px 9px; border: 1px solid currentColor; color: var(--navy); }
+  .credit { font-family: var(--sans); font-size: 12.5px; color: var(--muted); margin-top: 6px; }
+  figure { margin: 0; }
+  figcaption { font-family: var(--sans); font-size: 14px; color: var(--muted); margin-top: 8px; line-height: 1.4; }
+  .ph { background: #ddd3bf; }
+
+  /* ---------- hero ---------- */
+  .hero { display: grid; grid-template-columns: 1.25fr 1fr; gap: 50px; align-items: start; }
+  .title-block { position: relative; padding: 30px 0 10px; overflow: hidden; }
+  .title-block .sun { position: absolute; right: -120px; top: -140px; width: 520px; height: 520px; border-radius: 50%; opacity: .18; pointer-events: none;
+    background: repeating-conic-gradient(from 0deg, var(--gold) 0 4deg, transparent 4deg 12deg); -webkit-mask: radial-gradient(circle, #000 30%, transparent 70%); mask: radial-gradient(circle, #000 30%, transparent 70%); }
+  .title-block h1 { font-size: clamp(54px, 6.4vw, 104px); letter-spacing: -.01em; position: relative; }
+  .title-block h1 em { display: block; font-style: italic; font-weight: 500; color: var(--red); font-size: .5em; letter-spacing: .01em; margin-top: 10px; }
+  .years { display: flex; align-items: center; gap: 16px; margin: 22px 0 6px; font-family: var(--sans); letter-spacing: .3em; font-size: 15px; color: var(--muted); }
+  .years i { flex: 1; height: 1px; background: linear-gradient(90deg, var(--gold), transparent); max-width: 260px; }
+  .keyq { list-style: none; padding: 0; margin: 16px 0 0; counter-reset: k; }
+  .keyq li { counter-increment: k; padding: 12px 0 12px 54px; position: relative; border-bottom: 1px solid var(--line); font-size: 20px; }
+  .keyq li::before { content: counter(k, upper-roman); position: absolute; left: 0; top: 10px; font-family: var(--display); font-size: 26px; color: var(--gold); width: 40px; text-align: center; }
+  .pp { font-family: var(--sans); font-size: 15px; color: var(--muted); margin-top: 22px; line-height: 1.5; border: 1px dashed #c2b597; padding: 12px 16px; }
+  .plan { display: grid; gap: 6px; }
+  .plan button { display: grid; grid-template-columns: 44px 1fr auto; align-items: center; gap: 10px; text-align: left; background: var(--card); border: 1px solid var(--line); padding: 11px 14px; transition: border-color .2s, transform .2s; }
+  .plan button:hover { border-color: var(--gold); transform: translateX(4px); }
+  .plan .n { font-family: var(--display); font-size: 24px; color: var(--red); text-align: center; }
+  .plan .t { font-family: var(--display); font-size: 19px; font-weight: 600; }
+  .plan .m { font-family: var(--sans); font-size: 13.5px; color: var(--muted); }
+  .faces { display: flex; margin-top: 26px; }
+  .faces img { width: 64px; height: 80px; object-fit: cover; border: 3px solid var(--paper); margin-left: -12px; filter: grayscale(1) contrast(1.05); box-shadow: 0 4px 10px rgba(0,0,0,.18); }
+  .faces img:first-child { margin-left: 0; }
+  details.src { margin-top: 30px; font-family: var(--sans); font-size: 14px; color: var(--muted); }
+  details.src summary { cursor: pointer; }
+  details.src ul { columns: 3 260px; font-size: 12.5px; padding-left: 18px; }
+
+  /* ---------- timeline ---------- */
+  .tl-layout { display: grid; grid-template-columns: 1fr 1.25fr; gap: 34px; align-items: start; }
+  .pool { display: grid; gap: 8px; }
+  .ev { text-align: left; background: var(--card); border: 1px solid #c9bea6; padding: 11px 14px; font-size: 17px; line-height: 1.35; transition: all .2s; }
+  .ev:hover { border-color: var(--ink); }
+  .ev.sel { background: var(--ink); color: #f6efdf; border-color: var(--ink); }
+  .ladder { position: relative; display: grid; gap: 8px; padding-left: 26px; }
+  .ladder::before { content: ""; position: absolute; left: 7px; top: 8px; bottom: 8px; width: 2px; background: linear-gradient(var(--gold), var(--red)); }
+  .rung { display: grid; grid-template-columns: 74px 1fr; align-items: center; gap: 12px; position: relative; }
+  .rung::before { content: ""; position: absolute; left: -24px; width: 12px; height: 12px; border-radius: 50%; background: var(--paper); border: 2px solid var(--gold); }
+  .rung .y { font-family: var(--display); font-size: 26px; font-weight: 600; }
+  .slot { min-height: 50px; border: 1.5px dashed #bfb397; display: flex; align-items: center; padding: 6px 12px; font-size: 16.5px; line-height: 1.3; color: var(--muted); background: rgba(255,255,255,.35); cursor: pointer; transition: all .2s; }
+  .slot.filled { border-style: solid; color: var(--ink); background: var(--card); }
+  .slot.ok { border-color: var(--ok); background: #e8f1e4; }
+  .slot.bad { border-color: var(--bad); background: #f6e3df; }
+  .slot:hover { border-color: var(--ink); }
+
+  /* ---------- oświata ---------- */
+  .edu-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 28px; }
+  .bars { display: grid; gap: 18px; margin-top: 14px; }
+  .bar { display: grid; grid-template-columns: 150px 1fr 118px; align-items: center; gap: 14px; }
+  .bar .lab { font-family: var(--sans); font-size: 16px; }
+  .bar .track { height: 30px; background: var(--paper-2); position: relative; overflow: hidden; }
+  .bar .fill { position: absolute; inset: 0 auto 0 0; width: 0; background: repeating-linear-gradient(135deg, var(--red) 0 8px, #b02a2a 8px 16px); transition: width 1.1s cubic-bezier(.3,.9,.3,1); }
+  .bar .val { font-family: var(--display); font-size: 26px; font-weight: 600; white-space: nowrap; opacity: 0; transition: opacity .5s .6s; }
+  .bars.shown .val { opacity: 1; }
+  .guess { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 16px; }
+  .reform { display: grid; grid-template-columns: 110px 1fr; gap: 18px; }
+  .reform img { width: 110px; height: 140px; object-fit: cover; filter: grayscale(1); }
+  .reform ul { margin: 8px 0 0; padding-left: 20px; font-size: 17.5px; }
+  .stairs { display: flex; align-items: flex-end; gap: 6px; margin-top: 16px; height: 230px; }
+  .step { flex: 1; display: flex; flex-direction: column; justify-content: flex-end; text-align: center; font-family: var(--sans); font-size: 14.5px; line-height: 1.25; }
+  .step div { background: var(--navy); color: #f3ead6; padding: 10px 6px; display: flex; flex-direction: column; justify-content: center; gap: 4px; }
+  .step div b { font-family: var(--display); font-size: 22px; }
+  .step:nth-child(2) div { background: #2c4462; }
+  .step:nth-child(3) div { background: #3d5a7e; }
+  .step:nth-child(4) div { background: var(--gold); color: #1a1814; }
+  .facts3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 18px; }
+  .fact { border-top: 3px solid var(--red); padding-top: 10px; }
+  .fact b { display: block; font-family: var(--display); font-size: 40px; line-height: 1; }
+  .fact span { font-family: var(--sans); font-size: 15px; color: var(--muted); }
+  .warto { display: grid; grid-template-columns: 1fr 1.1fr; gap: 26px; margin-top: 28px; background: #efe5cf; border: 1px solid #d3c39e; padding: 24px; }
+  .warto .kicker { color: var(--navy); }
+
+  /* ---------- nauka: flip cards ---------- */
+  .chips { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 18px; }
+  .chip { background: none; border: 1px solid #b9ad95; padding: 6px 14px; font-family: var(--sans); font-size: 14.5px; letter-spacing: .05em; }
+  .chip.on { background: var(--ink); color: #f6efdf; border-color: var(--ink); }
+  .flip-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px; }
+  .flip { perspective: 1200px; height: 330px; background: none; border: 0; padding: 0; text-align: left; }
+  .flip.hide { display: none; }
+  .flip .in { position: relative; width: 100%; height: 100%; transition: transform .7s cubic-bezier(.3,.8,.3,1); transform-style: preserve-3d; }
+  .flip.open .in { transform: rotateY(180deg); }
+  .flip .f, .flip .b { position: absolute; inset: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden; border: 1px solid var(--line); overflow: hidden; }
+  .flip .f { background: #1a1814; color: #f3ead6; display: flex; flex-direction: column; }
+  .flip .f img { flex: 1; min-height: 0; width: 100%; object-fit: cover; object-position: center 20%; filter: grayscale(1) contrast(1.05); }
+  .flip .f .nm { padding: 10px 14px 12px; font-family: var(--display); font-size: 20px; font-weight: 600; line-height: 1.15; }
+  .flip .f .nm small { display: block; font-family: var(--sans); font-size: 12.5px; letter-spacing: .14em; text-transform: uppercase; color: var(--gold-hi); font-weight: 500; margin-bottom: 3px; }
+  .flip .b { transform: rotateY(180deg); background: var(--card); padding: 18px 18px; display: flex; flex-direction: column; gap: 8px; }
+  .flip .b h4 { margin: 0; font-family: var(--display); font-size: 21px; color: var(--red); line-height: 1.15; }
+  .flip .b p { margin: 0; font-size: 16px; line-height: 1.45; }
+  .flip .hint { position: absolute; right: 10px; top: 10px; width: 28px; height: 28px; border-radius: 50%; background: rgba(0,0,0,.55); color: var(--gold-hi); display: grid; place-items: center; font-family: var(--sans); font-size: 15px; }
+  .spot { display: grid; grid-template-columns: 1fr 1.3fr; gap: 26px; margin-top: 28px; background: #14120e; color: #efe6d2; padding: 26px; }
+  .spot h3 { color: #fff; font-size: 30px; }
+  .spot .kicker { color: var(--gold-hi); }
+  .spot p { font-size: 17.5px; }
+  .spot .pics { display: grid; grid-template-columns: 1.3fr 1fr; gap: 12px; }
+  .spot .pics img { width: 100%; height: 100%; object-fit: cover; }
+  .spot ol { padding-left: 22px; font-size: 17px; margin: 10px 0 0; }
+
+  /* ---------- literatura: półka ---------- */
+  .lit-layout { display: grid; grid-template-columns: 1.15fr 1fr; gap: 30px; align-items: start; }
+  .shelf-wrap { background: linear-gradient(#3a2a1c, #2a1d12); padding: 26px 22px 0; box-shadow: inset 0 10px 30px rgba(0,0,0,.5); }
+  .shelf { display: flex; align-items: flex-end; gap: 5px; min-height: 340px; border-bottom: 16px solid #6b4a2c; padding: 0 6px; box-shadow: 0 10px 0 #4a321d; }
+  .spine { flex: 1; min-width: 0; border: 0; padding: 14px 0; writing-mode: vertical-rl; transform: rotate(180deg); font-family: var(--display); font-size: 17px; font-weight: 600; letter-spacing: .03em;
+    display: flex; align-items: center; justify-content: space-between; box-shadow: inset 3px 0 0 rgba(255,255,255,.12), inset -4px 0 0 rgba(0,0,0,.25); transition: transform .25s, filter .25s; white-space: nowrap; overflow: hidden; }
+  .spine small { font-family: var(--sans); font-size: 11.5px; letter-spacing: .14em; text-transform: uppercase; opacity: .85; font-weight: 500; }
+  .spine:hover { transform: rotate(180deg) translateY(12px); }
+  .spine.on { transform: rotate(180deg) translateY(26px); filter: brightness(1.15); }
+  .legend { display: flex; flex-wrap: wrap; gap: 8px 16px; margin-top: 14px; font-family: var(--sans); font-size: 14px; }
+  .legend i { display: inline-block; width: 14px; height: 14px; margin-right: 6px; vertical-align: -2px; }
+  .book { display: grid; grid-template-columns: 170px 1fr; gap: 20px; min-height: 340px; }
+  .book img { width: 170px; height: 230px; object-fit: cover; box-shadow: 0 10px 22px rgba(0,0,0,.25); }
+  .book h3 { font-size: 34px; margin: 6px 0 2px; }
+  .book .au { font-style: italic; color: var(--muted); font-size: 19px; }
+  .book p { font-size: 17.5px; }
+  .empty-book { display: grid; place-items: center; min-height: 340px; text-align: center; color: var(--muted); font-style: italic; }
+
+  /* ---------- sztuka ---------- */
+  .art-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .art { display: flex; flex-direction: column; }
+  .art .img { height: 300px; overflow: hidden; background: #ddd3bf; position: relative; }
+  .art .img img { width: 100%; height: 100%; object-fit: cover; transition: transform .6s; }
+  .art:hover .img img { transform: scale(1.04); }
+  .art .ask { font-family: var(--sans); font-size: 15px; margin: 12px 0 8px; }
+  .art .opts { display: flex; gap: 6px; flex-wrap: wrap; }
+  .art .opts button { background: var(--card); border: 1px solid #b9ad95; padding: 6px 12px; font-family: var(--sans); font-size: 14.5px; }
+  .art .opts button.ok { background: var(--ok); color: #fff; border-color: var(--ok); }
+  .art .opts button.bad { background: var(--bad); color: #fff; border-color: var(--bad); }
+  .art .exp { font-size: 16px; margin-top: 10px; display: none; }
+  .art.done .exp { display: block; }
+  .people { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 14px; margin-top: 26px; }
+  .person { display: grid; grid-template-columns: 76px 1fr; gap: 14px; align-items: start; background: var(--card); border: 1px solid var(--line); padding: 12px; }
+  .person img { width: 76px; height: 96px; object-fit: cover; filter: grayscale(1); }
+  .person b { font-family: var(--display); font-size: 19px; display: block; line-height: 1.15; }
+  .person span { font-size: 15.5px; line-height: 1.4; display: block; margin-top: 4px; }
+  .sub-h { display: flex; align-items: center; gap: 14px; margin: 34px 0 14px; }
+  .sub-h h3 { font-size: 28px; }
+  .sub-h i { flex: 1; height: 1px; background: var(--line); }
+
+  /* ---------- kultura masowa: radio ---------- */
+  .radio-layout { display: grid; grid-template-columns: 430px 1fr; gap: 30px; align-items: start; }
+  .radio { background: linear-gradient(160deg, #5a3a22, #3a2414 60%, #2a190d); border-radius: 26px 26px 10px 10px; padding: 22px 22px 18px; box-shadow: 0 22px 40px rgba(40,20,5,.35), inset 0 2px 0 rgba(255,255,255,.12); position: sticky; top: 90px; }
+  .grille { height: 170px; border-radius: 120px 120px 6px 6px; background: radial-gradient(circle at 50% 120%, #c9a35e, #8a6a34 70%); position: relative; overflow: hidden; box-shadow: inset 0 0 0 4px #2a190d, inset 0 0 0 7px #b8914c; }
+  .grille::before { content: ""; position: absolute; inset: 7px; border-radius: 114px 114px 3px 3px;
+    background: repeating-linear-gradient(90deg, rgba(42,25,13,.85) 0 3px, transparent 3px 11px), repeating-conic-gradient(from -90deg at 50% 100%, rgba(42,25,13,.55) 0 2deg, transparent 2deg 15deg); }
+  .grille .logo { position: absolute; left: 50%; bottom: 14px; transform: translateX(-50%); background: #2a190d; color: var(--gold-hi); font-family: var(--display); font-style: italic; font-size: 16px; padding: 3px 14px; border: 1px solid var(--gold); white-space: nowrap; }
+  .dial { margin-top: 16px; background: linear-gradient(#f5e6bf, #e3cd96); border-radius: 6px; padding: 10px 12px 8px; position: relative; box-shadow: inset 0 2px 6px rgba(0,0,0,.35); }
+  .dial .scale { display: flex; justify-content: space-between; font-family: var(--sans); font-size: 11px; letter-spacing: .1em; color: #5a4325; border-bottom: 1px solid #a88a52; padding-bottom: 4px; }
+  .dial .ticks { height: 12px; background: repeating-linear-gradient(90deg, #8a6a3a 0 1px, transparent 1px 8px); margin-top: 2px; }
+  .needle { position: absolute; top: 4px; bottom: 4px; width: 3px; background: var(--red); left: 10%; transition: left .7s cubic-bezier(.4,1.4,.5,1); box-shadow: 0 0 6px rgba(155,28,28,.6); }
+  .stations { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 16px; }
+  .stations button { background: #24160b; color: #e7d3a4; border: 1px solid #6e5030; padding: 10px 4px; font-family: var(--sans); font-size: 14px; letter-spacing: .12em; text-transform: uppercase; border-radius: 4px; box-shadow: 0 3px 0 #120a04; transition: all .15s; }
+  .stations button:hover { color: #fff; }
+  .stations button.on { background: var(--gold); color: #1a1006; transform: translateY(2px); box-shadow: 0 1px 0 #120a04; }
+  .knobs { display: flex; justify-content: space-between; margin-top: 14px; }
+  .knob { width: 46px; height: 46px; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #d9b673, #6e4f22); box-shadow: 0 4px 6px rgba(0,0,0,.5); position: relative; transition: transform .7s; }
+  .knob::after { content: ""; position: absolute; left: 50%; top: 5px; width: 3px; height: 14px; margin-left: -1.5px; background: #2a190d; }
+  .lamp { width: 12px; height: 12px; border-radius: 50%; background: #ffb547; box-shadow: 0 0 12px #ffb547; align-self: center; }
+  .station-view { min-height: 600px; }
+  .station-view .sv { animation: fade .5s ease; }
+  .sv-head { display: flex; align-items: baseline; gap: 16px; border-bottom: 2px solid var(--ink); padding-bottom: 10px; margin-bottom: 18px; }
+  .sv-head h3 { font-size: 42px; }
+  .sv-head .freq { font-family: var(--sans); font-size: 14px; letter-spacing: .2em; color: var(--red); }
+  .sv-grid { display: grid; grid-template-columns: 1.15fr 1fr; gap: 24px; }
+  .sv ul { padding-left: 20px; margin: 0; }
+  .sv li { margin-bottom: 8px; font-size: 18px; }
+  .sv .pics { display: grid; gap: 10px; grid-template-columns: 1fr 1fr; }
+  .sv .pics figure img { width: 100%; height: 210px; object-fit: cover; }
+  .sv .pics figure.tall img { height: 300px; }
+  .sv .pics figure.wide { grid-column: 1 / -1; }
+  .stars { display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; margin-top: 18px; }
+  .star img { width: 100%; aspect-ratio: 3/4; object-fit: cover; filter: grayscale(1) contrast(1.05); }
+  .star b { display: block; font-family: var(--display); font-size: 16px; line-height: 1.15; margin-top: 6px; }
+  .star span { font-family: var(--sans); font-size: 12.5px; color: var(--muted); }
+  .why { margin-top: 18px; background: #efe5cf; padding: 14px 18px; border-left: 4px solid var(--red); font-size: 17.5px; }
+  .why b { font-family: var(--sans); font-size: 13px; letter-spacing: .16em; text-transform: uppercase; color: var(--red); display: block; margin-bottom: 4px; }
+
+  /* ---------- quiz klasowy ---------- */
+  .quiz { max-width: 1000px; margin: 0 auto; background: var(--card); border: 1px solid var(--line); padding: 30px 34px; }
+  .q-top { display: flex; justify-content: space-between; font-family: var(--sans); font-size: 15px; color: var(--muted); }
+  .q-dots { display: flex; gap: 6px; margin: 12px 0 20px; flex-wrap: wrap; }
+  .q-dots i { width: 22px; height: 6px; background: var(--paper-2); }
+  .q-dots i.cur { background: var(--ink); } .q-dots i.ok { background: var(--ok); } .q-dots i.bad { background: var(--bad); }
+  .q-text { font-family: var(--display); font-size: clamp(26px, 2.4vw, 36px); line-height: 1.2; margin-bottom: 22px; }
+  .q-choices { display: grid; gap: 10px; }
+  .q-choices.two { grid-template-columns: 1fr 1fr; }
+  .choice { text-align: left; background: #fff; border: 1.5px solid #c9bea6; padding: 14px 18px; font-size: 19px; transition: all .15s; }
+  .q-choices.two .choice { text-align: center; font-family: var(--display); font-size: 30px; padding: 22px; }
+  .choice:hover:not(:disabled) { border-color: var(--ink); }
+  .choice.ok { background: #e3efdf; border-color: var(--ok); }
+  .choice.bad { background: #f5e1dd; border-color: var(--bad); }
+  .q-feedback { margin-top: 16px; padding: 14px 18px; font-size: 18px; }
+  .q-feedback.ok { background: #e8f1e4; } .q-feedback.bad { background: #f6e3df; }
+  .q-nav { display: flex; justify-content: space-between; margin-top: 20px; }
+  .q-end { text-align: center; }
+  .q-end .big { font-family: var(--display); font-size: 90px; font-weight: 600; }
+
+  /* ---------- sprawdzian (nauczyciel) ---------- */
+  .spr-layout { display: grid; grid-template-columns: 1fr 1.1fr; gap: 24px; }
+  #qr { background: #fff; padding: 16px; display: inline-block; }
+  .url { font-family: var(--sans); font-size: 14px; word-break: break-all; margin-top: 10px; color: var(--muted); }
+  .field { display: grid; gap: 4px; margin-bottom: 12px; }
+  .field label { font-family: var(--sans); font-size: 14px; color: var(--muted); }
+  .field input { font: inherit; font-size: 17px; padding: 9px 12px; border: 1px solid #b9ad95; background: #fff; }
+  .code-out { font-family: var(--display); font-size: 34px; font-weight: 700; letter-spacing: .14em; color: var(--red); }
+  table.grades { width: 100%; border-collapse: collapse; font-size: 17px; }
+  table.grades td { padding: 6px 4px; border-bottom: 1px solid var(--line); }
+
+  /* ---------- tryb ucznia ---------- */
+  body.student { font-size: 18px; }
+  body.student .topbar nav, body.student #fsBtn { display: none; }
+  .st { max-width: 680px; margin: 0 auto; }
+  .st h2 { font-size: 36px; margin: 8px 0; }
+  .st .q-text { font-size: 25px; }
+  .st .choice { width: 100%; margin-bottom: 8px; font-size: 18px; }
+  .st .choice.chosen { background: var(--ink); color: #f6efdf; border-color: var(--ink); }
+  .st-choices.tf { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .st-choices.tf .choice { text-align: center; font-size: 22px; padding: 18px; }
+  .choice.check { display: flex; gap: 12px; align-items: center; }
+  .choice.check .box { width: 20px; height: 20px; border: 2px solid currentColor; flex: none; }
+  .choice.check.chosen .box { background: var(--gold-hi); }
+  .choice.ord { display: flex; gap: 12px; align-items: center; }
+  .choice.ord .badge { width: 30px; height: 30px; border: 2px solid currentColor; display: grid; place-items: center; flex: none; font-family: var(--sans); font-weight: 600; }
+  .match-row { display: grid; gap: 6px; margin-bottom: 12px; padding: 12px; background: #fff; border: 1px solid var(--line); }
+  .match-row select { font: inherit; font-size: 17px; padding: 8px; border: 1px solid #b9ad95; background: var(--paper); }
+  .st-input { width: 100%; font: inherit; font-size: 20px; padding: 14px; border: 1.5px solid #b9ad95; background: #fff; }
+  .progress { height: 6px; background: var(--paper-2); margin: 10px 0 18px; }
+  .progress i { display: block; height: 100%; background: var(--red); }
+  .type-hint { font-family: var(--sans); font-size: 13px; letter-spacing: .16em; text-transform: uppercase; color: var(--red); margin-bottom: 8px; }
+  .warn { background: #f6e3df; border-left: 4px solid var(--bad); padding: 10px 14px; margin-bottom: 14px; font-size: 16px; }
+  .result { text-align: center; }
+  .result .seal { width: 170px; height: 170px; margin: 20px auto; border-radius: 50%; display: grid; place-content: center; background: var(--ink); color: var(--gold-hi); box-shadow: 0 0 0 6px var(--paper), 0 0 0 8px var(--gold); }
+  .result .seal .g { font-family: var(--display); font-size: 80px; font-weight: 700; line-height: 1; }
+  .result .seal .gw { font-family: var(--sans); font-size: 13px; letter-spacing: .14em; text-transform: uppercase; }
+  .result .who { font-family: var(--display); font-size: 30px; font-weight: 600; }
+  .result .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 18px 0; }
+  .result .stats div { background: var(--card); border: 1px solid var(--line); padding: 12px 6px; }
+  .result .stats b { display: block; font-family: var(--display); font-size: 26px; }
+  .result .stats small { font-family: var(--sans); color: var(--muted); font-size: 13px; }
+  .result .stats .alert { background: #f6e3df; border-color: var(--bad); }
+  .ansrow { display: flex; flex-wrap: wrap; gap: 4px; justify-content: center; }
+  .ansrow i { width: 26px; height: 26px; color: #fff; font-style: normal; font-family: var(--sans); font-size: 13px; display: grid; place-items: center; }
+  .clock { font-family: var(--sans); font-size: 26px; letter-spacing: .1em; margin: 12px 0; }
+
+  @media (max-width: 1100px) {
+    .hero, .tl-layout, .edu-grid, .lit-layout, .radio-layout, .spr-layout, .warto, .spot, .sv-grid { grid-template-columns: 1fr; }
+    .radio { position: static; max-width: 460px; }
+    .art-grid { grid-template-columns: 1fr 1fr; }
+    .stars { grid-template-columns: repeat(3, 1fr); }
+  }
+  @media (max-width: 640px) {
+    body { font-size: 17px; }
+    main { padding: 20px 16px 50px; }
+    .topbar .row { padding: 8px 14px; gap: 10px; }
+    .brand { font-size: 16px; }
+    .brand span { display: none; }
+    .art-grid { grid-template-columns: 1fr; }
+    .bar { grid-template-columns: 110px 1fr 56px; }
+    .book { grid-template-columns: 1fr; }
+    .facts3 { grid-template-columns: 1fr; }
+    .shelf { min-height: 260px; }
+    .spine { font-size: 13px; }
+    .result .stats b { font-size: 20px; }
+  }
+  @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+</style>
+</head>
+<body>
+<div class="topbar">
+  <div class="row">
+    <div class="brand" title="Kultura i nauka II RP">
+      <svg viewBox="0 0 40 40" aria-hidden="true"><rect x="1" y="1" width="38" height="38" fill="none" stroke="#d8b46a"/><path d="M20 6 L20 34 M8 30 L20 10 L32 30" fill="none" stroke="#d8b46a" stroke-width="1.6"/><path d="M6 34 H34" stroke="#c0392b" stroke-width="2.4"/></svg>
+      II RP · <span>Kultura i nauka</span>
+    </div>
+    <nav class="tabs" id="tabs"></nav>
+    <button class="icon-btn" id="fsBtn" title="Pełny ekran">⛶ Pełny ekran</button>
+  </div>
+</div>
+<div class="deco"></div>
+
+<main id="teacher">
+  <!-- 0. WSTĘP -->
+  <section class="panel" data-label="Wstęp">
+    <div class="hero">
+      <div>
+        <div class="title-block">
+          <div class="sun"></div>
+          <div class="kicker">II Rzeczpospolita · kultura i społeczeństwo</div>
+          <h1>Dwudziestolecie<em>Kultura i nauka II Rzeczypospolitej</em></h1>
+          <div class="years">1918 <i></i> 1939</div>
+        </div>
+        <p class="lead">Dwadzieścia lat wolności wystarczyło, by Polacy złamali szyfr Enigmy, zdobyli olimpijskie złoto, zbudowali Gdynię, a w domach zagrało radio. Prześledźmy, kto tworzył kulturę i naukę odrodzonego państwa — i jak narodziła się kultura masowa.</p>
+        <h3 style="margin-top:26px">Pytania na dziś</h3>
+        <ul class="keyq">
+          <li>Z jakimi problemami zmagała się oświata w odrodzonej Polsce?</li>
+          <li>Jakie osiągnięcia mieli polscy uczeni, pisarze i artyści — i kim byli?</li>
+          <li>Czym była kultura masowa i jak zmieniła codzienne życie Polaków?</li>
+        </ul>
+        <div class="faces" id="faces"></div>
+        <div class="pp"><b>Podstawa programowa.</b> Uczeń rozpoznaje osiągnięcia w dziedzinie kultury i nauki z okresu II Rzeczypospolitej oraz ich twórców; charakteryzuje przejawy kultury masowej w Polsce międzywojennej.</div>
+      </div>
+      <div>
+        <div class="kicker" style="margin-bottom:10px">Przebieg lekcji</div>
+        <div class="plan" id="plan"></div>
+        <p class="muted" style="font-size:14.5px;margin-top:12px;font-family:var(--sans)">Strzałki ← → na klawiaturze przełączają etapy.</p>
+        <details class="src"><summary>Źródła ilustracji</summary><p>Fotografie i reprodukcje pochodzą z Wikimedia Commons i Wikipedii (licencje wolne lub domena publiczna). Nazwy plików:</p><ul id="srcList"></ul></details>
+      </div>
+    </div>
+  </section>
+
+  <!-- 1. OŚ CZASU -->
+  <section class="panel" data-label="Oś czasu" data-min="5 min">
+    <div class="head">
+      <div><div class="kicker">Etap 1 · Rozgrzewka</div><h2>Dwudziestolecie w dziesięciu datach</h2>
+      <p class="lead">Kliknij wydarzenie, a potem rok, do którego pasuje. Nie znacie odpowiedzi? Zgadujcie — po lekcji sprawdzimy jeszcze raz.</p></div>
+    </div>
+    <div class="tl-layout">
+      <div><div class="kicker" style="margin-bottom:10px">Wydarzenia</div><div class="pool" id="tlPool"></div></div>
+      <div>
+        <div class="kicker" style="margin-bottom:10px">Lata</div>
+        <div class="ladder" id="tlLadder"></div>
+        <div class="btns" style="margin-top:18px"><button class="btn primary" id="tlCheck">Sprawdź</button><button class="btn" id="tlSolve">Pokaż rozwiązanie</button><button class="btn" id="tlReset">Od nowa</button></div>
+        <div class="note" id="tlMsg" hidden style="margin-top:14px"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. OŚWIATA -->
+  <section class="panel" data-label="Oświata" data-min="8 min">
+    <div class="head">
+      <div><div class="kicker">Etap 2 · Szkoła i uniwersytet</div><h2>Szkoła dla wszystkich?</h2>
+      <p class="lead">Odrodzona Polska odziedziczyła trzy różne systemy szkolne i miliony ludzi, którzy nie umieli czytać ani pisać. Zbudowanie wspólnej szkoły było jednym z najważniejszych zadań państwa.</p></div>
+    </div>
+    <div class="edu-grid">
+      <div class="card deco-c">
+        <div class="kicker">Zgadnijcie</div>
+        <h3 style="margin-top:6px">Jaki odsetek mieszkańców nie umiał czytać i pisać?</h3>
+        <p class="muted" style="font-size:16.5px;margin:6px 0 0">Dane z początku lat 20. dla ziem trzech dawnych zaborów. Najpierw niech klasa zgadnie, potem odsłoń wynik.</p>
+        <div class="bars" id="bars">
+          <div class="bar"><span class="lab">zabór rosyjski</span><span class="track"><span class="fill" data-v="60"></span></span><span class="val">ok. 60%</span></div>
+          <div class="bar"><span class="lab">zabór austriacki</span><span class="track"><span class="fill" data-v="40"></span></span><span class="val">ok. 40%</span></div>
+          <div class="bar"><span class="lab">zabór pruski</span><span class="track"><span class="fill" data-v="4"></span></span><span class="val">ok. 4%</span></div>
+        </div>
+        <div class="guess"><button class="btn primary" id="barsShow">Odsłoń dane</button></div>
+        <p id="barsNote" hidden style="font-size:17.5px;margin:16px 0 0">Skąd te różnice? W zaborze pruskim od dawna obowiązywał <b>przymus szkolny</b>, w rosyjskim — nie. Już w <b>1919 r.</b> wprowadzono <b>powszechny obowiązek szkolny</b> dla dzieci do 14. roku życia. Według spisów analfabeci stanowili ok. <b>33%</b> mieszkańców w 1921 r. i ok. <b>23%</b> w 1931 r. — mimo postępów problem nie zniknął.</p>
+      </div>
+      <div style="display:grid;gap:16px">
+        <div class="card reform">
+          <img src="obrazy/grabski.jpg" alt="Stanisław Grabski">
+          <div><div class="kicker">1924 · reforma Grabskiego</div><h3 style="margin-top:4px">Szkoła a mniejszości</h3>
+            <ul><li>ograniczyła liczbę szkół dla mniejszości narodowych,</li><li>wprowadziła <b>szkoły dwujęzyczne</b> (utrakwistyczne),</li><li>miała wzmacniać polskość — w praktyce dyskryminowała Ukraińców i Białorusinów.</li></ul></div>
+        </div>
+        <div class="card reform">
+          <img src="obrazy/jedrzejewicz.jpg" alt="Janusz Jędrzejewicz">
+          <div><div class="kicker">1932 · reforma Jędrzejewicza</div><h3 style="margin-top:4px">Jeden system dla całego kraju</h3>
+            <ul><li>zatarła różnice między dawnymi zaborami,</li><li>ujednoliciła program i poziom nauczania,</li><li>szkoły średnie pozostały <b>płatne i elitarne</b>.</li></ul></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="edu-grid" style="margin-top:24px">
+      <div class="card">
+        <div class="kicker">Po reformie z 1932 r.</div>
+        <h3 style="margin-top:4px">Droga ucznia do matury</h3>
+        <div class="stairs">
+          <div class="step"><div style="height:90px"><b>7 lat</b>szkoła powszechna</div></div>
+          <div class="step"><div style="height:130px"><b>4 lata</b>gimnazjum</div></div>
+          <div class="step"><div style="height:170px"><b>2 lata</b>liceum<br>i matura</div></div>
+          <div class="step"><div style="height:210px"><b>studia</b>uniwersytet, politechnika</div></div>
+        </div>
+        <p style="font-size:16.5px;margin:14px 0 0" class="muted">Dzieci wiejskie często chodziły do szkoły tylko 4 lata, a nie 7. Do matury w całej Polsce przystępowało rocznie zaledwie kilkanaście tysięcy osób.</p>
+      </div>
+      <div class="card">
+        <div class="kicker">Szkolnictwo wyższe</div>
+        <h3 style="margin-top:4px">Uniwersytety odrodzonego państwa</h3>
+        <div class="facts3">
+          <div class="fact"><b>32</b><span>uczelnie wyższe tuż przed II wojną światową</span></div>
+          <div class="fact"><b>&lt;1%</b><span>Polaków z wyższym wykształceniem</span></div>
+          <div class="fact"><b>28%</b><span>studentów stanowiły w 1938 r. kobiety</span></div>
+        </div>
+        <p style="font-size:17px;margin:16px 0 0">Powstały nowe uczelnie, m.in. Uniwersytet Poznański, Uniwersytet Stefana Batorego w Wilnie i Akademia Górnicza w Krakowie. Życie naukowe koordynowała <b>Polska Akademia Umiejętności</b> w Krakowie.</p>
+      </div>
+    </div>
+
+    <div class="warto">
+      <figure><img src="obrazy/getto.jpg" alt="Transparent ONR na Politechnice Lwowskiej"><figcaption>Transparent „Żądamy urzędowego getta” na Politechnice Lwowskiej, lata 30.</figcaption></figure>
+      <div>
+        <div class="kicker">Warto wiedzieć</div>
+        <h3 style="margin-top:6px">Getto ławkowe i <i>numerus clausus</i></h3>
+        <p style="font-size:17.5px">W drugiej połowie lat 30. na uczelniach nasiliły się akty antysemityzmu, inspirowane przez organizacje skrajnej prawicy (np. Młodzież Wszechpolską, ONR). Na wielu uczelniach wprowadzono <b>getto ławkowe</b> — Żydzi mieli siedzieć w wyznaczonych ławkach. Niektóre stosowały <b><i>numerus clausus</i></b> (łac. „liczba zamknięta”), ograniczając liczbę studentów danej narodowości.</p>
+        <p style="font-size:17.5px">Część profesorów i studentów protestowała — studenci nie-Żydzi siadali solidarnie w „żydowskich” ławkach lub stali przez cały wykład.</p>
+        <button class="btn" data-reveal="gettoQ">Pytanie do dyskusji</button>
+        <div class="note" id="gettoQ" hidden style="margin-top:12px">Jakie były przejawy antysemityzmu na polskich uczelniach w II Rzeczypospolitej? Jak na nie reagowano?</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. NAUKA -->
+  <section class="panel" data-label="Nauka i technika" data-min="8 min">
+    <div class="head">
+      <div><div class="kicker">Etap 3 · Gabinet uczonych</div><h2>Nauka i technika</h2>
+      <p class="lead">Najpierw niech klasa zgadnie, czym zasłynęła dana osoba — dopiero potem odwróć kartę.</p></div>
+      <button class="btn" id="flipAll">Odwróć wszystkie</button>
+    </div>
+    <div class="chips" id="sciChips"></div>
+    <div class="flip-grid" id="sciGrid"></div>
+
+    <div class="spot">
+      <div class="pics">
+        <figure><img src="obrazy/enigma.jpg" alt="Maszyna szyfrująca Enigma" style="background:#fff"></figure>
+        <div style="display:grid;gap:12px">
+          <figure><img src="obrazy/rejewski.jpg" alt="Marian Rejewski" style="filter:grayscale(1);height:170px"></figure>
+          <figure><img src="obrazy/zygalski.jpg" alt="Henryk Zygalski" style="filter:grayscale(1);height:170px"></figure>
+        </div>
+      </div>
+      <div>
+        <div class="kicker">Symbol epoki</div>
+        <h3 style="margin-top:6px">Złamanie Enigmy</h3>
+        <p>Niemiecka maszyna szyfrująca Enigma uchodziła za niemożliwą do złamania. W grudniu 1932 r. <b>Marian Rejewski</b>, matematyk z Biura Szyfrów Sztabu Głównego, odtworzył jej wewnętrzne połączenia, korzystając z matematyki — a nie, jak dotąd, z lingwistyki. Wraz z <b>Henrykiem Zygalskim</b> i <b>Jerzym Różyckim</b> przez lata odczytywał niemieckie depesze.</p>
+        <ol>
+          <li>1929 — kurs kryptologii dla studentów matematyki w Poznaniu.</li>
+          <li>1932 — Rejewski łamie szyfr Enigmy.</li>
+          <li>Lipiec 1939 — w Pyrach pod Warszawą Polacy przekazują wiedzę Francuzom i Brytyjczykom.</li>
+          <li>II wojna światowa — polskie metody pomagają Brytyjczykom w Bletchley Park.</li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. LITERATURA -->
+  <section class="panel" data-label="Literatura" data-min="7 min">
+    <div class="head">
+      <div><div class="kicker">Etap 4 · Biblioteka dwudziestolecia</div><h2>Półka z książkami</h2>
+      <p class="lead">Kliknij grzbiet książki. Kolor oznacza nurt — zanim przeczytasz opis, spróbujcie odgadnąć, do którego należy.</p></div>
+    </div>
+    <div class="lit-layout">
+      <div>
+        <div class="shelf-wrap"><div class="shelf" id="shelf"></div></div>
+        <div class="legend" id="legend"></div>
+      </div>
+      <div class="card deco-c" id="bookView"><div class="empty-book">Wybierz książkę z półki.</div></div>
+    </div>
+  </section>
+
+  <!-- 5. SZTUKA -->
+  <section class="panel" data-label="Sztuka i muzyka" data-min="7 min">
+    <div class="head">
+      <div><div class="kicker">Etap 5 · Galeria</div><h2>Sztuka, architektura, teatr i muzyka</h2>
+      <p class="lead">Twórcy szukali stylu, który byłby jednocześnie nowoczesny i polski. Rozpoznajcie nurt, zanim kliknięcie podpowie odpowiedź.</p></div>
+    </div>
+    <div class="art-grid" id="artGrid"></div>
+
+    <div class="sub-h"><h3>Twórcy</h3><i></i></div>
+    <div class="people" id="artPeople"></div>
+  </section>
+
+  <!-- 6. KULTURA MASOWA -->
+  <section class="panel" data-label="Kultura masowa" data-min="10 min">
+    <div class="head">
+      <div><div class="kicker">Etap 6 · Rozrywka dla milionów</div><h2>Kultura masowa</h2>
+      <p class="lead">Kultura masowa to treści tworzone dla szerokiej publiczności i rozpowszechniane przez prasę, radio i kino. Nastrój odbiornik i posłuchaj, co nadają.</p></div>
+    </div>
+    <div class="radio-layout">
+      <div class="radio">
+        <div class="grille"><div class="logo">Polskie Radio · Warszawa</div></div>
+        <div class="dial"><div class="scale" id="scale"></div><div class="ticks"></div><div class="needle" id="needle"></div></div>
+        <div class="stations" id="stations"></div>
+        <div class="knobs"><div class="knob" id="knobL"></div><div class="lamp"></div><div class="knob" id="knobR"></div></div>
+      </div>
+      <div class="station-view" id="stationView"></div>
+    </div>
+  </section>
+
+  <!-- 7. PRAWDA CZY FAŁSZ -->
+  <section class="panel" data-label="Prawda czy fałsz" data-min="5 min">
+    <div class="head">
+      <div><div class="kicker">Etap 7 · Podsumowanie</div><h2>Prawda czy fałsz?</h2>
+      <p class="lead">Klasa głosuje, nauczyciel zaznacza odpowiedź większości.</p></div>
+    </div>
+    <div id="pfQuiz"></div>
+  </section>
+
+  <!-- 8. SPRAWDZIAN (ukryty) -->
+  <section class="panel" data-label="Sprawdzian" data-hidden="1">
+    <div class="head">
+      <div><div class="kicker">Na koniec · Każdy osobno</div><h2>Sprawdzian na telefonie</h2>
+      <p class="lead">Uczniowie skanują kod QR i rozwiązują 15 losowych zadań: 6 × wybór ABCD, 3 × prawda/fałsz, 2 × wielokrotny wybór, kolejność wydarzeń, dopasowanie twórcy do osiągnięcia i 2 odpowiedzi wpisywane. Wynik i ocena pojawiają się od razu.</p></div>
+    </div>
+    <div class="spr-layout">
+      <div class="card">
+        <div class="kicker" style="margin-bottom:10px">Wejście dla uczniów</div>
+        <div id="qrBox"></div>
+      </div>
+      <div style="display:grid;gap:18px">
+        <div class="card">
+          <div class="kicker" style="margin-bottom:8px">Jak sprawdzić, czy wynik jest prawdziwy?</div>
+          <ul style="margin:0;padding-left:20px;font-size:17px">
+            <li>Na ekranie wyniku <b>tyka aktualny zegar</b> — zrzut ekranu od kolegi od razu widać.</li>
+            <li>Każde przełączenie aplikacji lub karty jest liczone jako <b>„wyjście ze strony”</b>.</li>
+            <li>Kod kontrolny zależy od imienia, wyniku, liczby wyjść i dzisiejszej daty — wpisz dane poniżej i porównaj.</li>
+            <li>Ponowne podejście na tym samym telefonie jest zablokowane.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="kicker" style="margin-bottom:8px">Weryfikacja kodu</div>
+          <div class="field"><label for="vName">Imię i nazwisko (jak wpisał uczeń)</label><input id="vName"></div>
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px">
+            <div class="field"><label for="vScore">Punkty</label><input id="vScore" type="number" min="0" max="15"></div>
+            <div class="field"><label for="vLeaves">Wyjścia</label><input id="vLeaves" type="number" min="0" value="0"></div>
+            <div class="field"><label for="vDate">Data</label><input id="vDate" type="date"></div>
+          </div>
+          <div>Poprawny kod: <span class="code-out" id="vCode">—</span></div>
+        </div>
+        <div class="card">
+          <div class="kicker" style="margin-bottom:8px">Skala ocen (15 pytań)</div>
+          <table class="grades" id="gradeTable"></table>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<main id="student" hidden><div class="st" id="st"></div></main>
+
+<script src="obrazy/zrodla.js"></script>
+<script>
+/* =========================================================
+   DANE
+   ========================================================= */
+const TIMELINE = [
+  { y: 1919, text: "Wprowadzenie powszechnego obowiązku szkolnego" },
+  { y: 1924, text: "Nagroda Nobla dla Władysława Reymonta za „Chłopów”" },
+  { y: 1926, text: "Polskie Radio rozpoczyna regularne nadawanie" },
+  { y: 1927, text: "Pierwszy Międzynarodowy Konkurs Chopinowski" },
+  { y: 1928, text: "Halina Konopacka zdobywa pierwsze polskie złoto olimpijskie" },
+  { y: 1930, text: "Premiera filmu „Moralność pani Dulskiej” — pierwszego polskiego filmu dźwiękowego" },
+  { y: 1932, text: "Żwirko i Wigura wygrywają międzynarodowe zawody lotnicze Challenge" },
+  { y: 1935, text: "Pierwszy Międzynarodowy Konkurs Skrzypcowy im. Henryka Wieniawskiego" },
+  { y: 1937, text: "Wprowadzenie getta ławkowego na wielu polskich uczelniach" },
+  { y: 1938, text: "Pierwsza próbna audycja telewizyjna w Warszawie" }
+];
+
+const SCIENCE = [
+  { img: "banach", name: "Stefan Banach", f: "matematyka", h: "Twórca analizy funkcjonalnej", t: "Czołowy przedstawiciel <b>szkoły lwowskiej</b>. Z Hugonem Steinhausem rozwinął nową dziedzinę matematyki — analizę funkcjonalną. Problemy zapisywano w „Księdze Szkockiej” w lwowskiej Kawiarni Szkockiej." },
+  { img: "steinhaus", name: "Hugo Steinhaus", f: "matematyka", h: "Współtwórca szkoły lwowskiej", t: "Matematyk, który „odkrył” Banacha, gdy usłyszał go dyskutującego o matematyce na ławce w krakowskim parku. Razem założyli czasopismo „Studia Mathematica”." },
+  { img: "rejewski", name: "Marian Rejewski", f: "kryptologia", h: "Złamał szyfr Enigmy", t: "Matematyk z Biura Szyfrów. W 1932 r. odtworzył budowę niemieckiej maszyny Enigma. Pracował z <b>Henrykiem Zygalskim</b> i <b>Jerzym Różyckim</b>." },
+  { img: "lukasiewicz", name: "Jan Łukasiewicz", f: "filozofia", h: "Logika matematyczna", t: "Jeden z filarów <b>szkoły lwowsko-warszawskiej</b>, która zyskała międzynarodowe uznanie w dziedzinie logiki. Należeli do niej też m.in. Kazimierz Twardowski i Alfred Tarski." },
+  { img: "tatarkiewicz", name: "Władysław Tatarkiewicz", f: "filozofia", h: "Historyk filozofii", t: "Autor „Historii filozofii”, z której uczą się kolejne pokolenia studentów. Z kręgiem szkoły lwowsko-warszawskiej wiąże się też fenomenolog <b>Roman Ingarden</b>." },
+  { img: "hirszfeld", name: "Ludwik Hirszfeld", f: "medycyna", h: "Grupy krwi", t: "Mikrobiolog i immunolog. Współtwórca oznaczeń grup krwi (A, B, AB, 0) i badacz ich dziedziczenia. Nominowany do Nagrody Nobla." },
+  { img: "weigl", name: "Rudolf Weigl", f: "medycyna", h: "Szczepionka na tyfus plamisty", t: "Biolog ze Lwowa. Wynalazł szczepionkę przeciw tyfusowi plamistemu — chorobie, która zbierała śmiertelne żniwo. Szczepionkę hodowano w wszach karmionych krwią ludzi. Nominowany do Nobla." },
+  { img: "zwirko_wigura", name: "Żwirko i Wigura", f: "technika", h: "Challenge 1932", t: "Pilot <b>Franciszek Żwirko</b> i konstruktor <b>Stanisław Wigura</b> wygrali w 1932 r. międzynarodowe zawody samolotów turystycznych Challenge na polskim samolocie <b>RWD-6</b>. Kilka tygodni później zginęli w katastrofie." },
+  { img: "rogalski", name: "Stanisław Rogalski", f: "technika", h: "Samoloty RWD", t: "Nazwa RWD pochodzi od nazwisk konstruktorów: <b>R</b>ogalskiego, <b>W</b>igury i <b>D</b>rzewieckiego. Ich samoloty sportowe i turystyczne zdobywały nagrody na całym świecie." },
+  { img: "los", name: "PZL.37 Łoś", f: "technika", h: "Bombowiec Jerzego Dąbrowskiego", t: "Zespół <b>Jerzego Dąbrowskiego</b> zaprojektował w Państwowych Zakładach Lotniczych bombowiec uważany przed wojną za jedną z najlepszych maszyn tej klasy na świecie." }
+];
+const SCI_F = { matematyka: "Matematyka", kryptologia: "Kryptologia", filozofia: "Filozofia", medycyna: "Medycyna", technika: "Technika" };
+
+const NURTY = {
+  real: ["Proza realistyczna i społeczna", "#7a2a1e"],
+  awang: ["Awangarda (futuryzm, ekspresjonizm)", "#1d2e44"],
+  grot: ["Groteska i katastrofizm", "#2f4a2e"],
+  pop: ["Literatura popularna", "#a8843a"],
+  poez: ["Poezja", "#5a3a5e"]
+};
+const BOOKS = [
+  { t: "Chłopi", a: "Władysław Reymont", y: "1904–1909 · Nobel 1924", n: "real", img: "reymont", h: 330, d: "Epopeja o życiu wsi Lipce, ułożona według rytmu pór roku. Za tę powieść Reymont otrzymał w <b>1924 r. Nagrodę Nobla</b> — drugą w historii polskiej literatury po Sienkiewiczu." },
+  { t: "Przedwiośnie", a: "Stefan Żeromski", y: "1924", n: "real", img: "zeromski", h: 290, d: "Powieść o młodym Cezarym Baryce, który przyjeżdża do odrodzonej Polski i zderza się z jej problemami. Żeromski, uważany za „sumienie narodu”, był w pierwszych latach niepodległości najpopularniejszym pisarzem." },
+  { t: "Noce i dnie", a: "Maria Dąbrowska", y: "1932–1934", n: "real", img: "dabrowska", h: 340, d: "Saga rodu Niechciców — historia małżeństwa Barbary i Bogumiła na tle przemian społecznych przełomu XIX i XX w. Przykład powieści społeczno-obyczajowej." },
+  { t: "Granica", a: "Zofia Nałkowska", y: "1935", n: "real", img: "nalkowska", h: 270, d: "Psychologiczno-społeczna powieść o karierze Zenona Ziembiewicza i granicach, jakie wyznaczają człowiekowi pochodzenie, środowisko i własne wybory." },
+  { t: "Palę Paryż", a: "Bruno Jasieński", y: "1928", n: "awang", img: "jasienski", h: 250, d: "Jasieński był czołowym <b>futurystą</b> — prowokował, łamał zasady ortografii i zachwycał się techniką i miastem. Powieść opisuje zagładę Paryża zarażonego dżumą." },
+  { t: "Zmory", a: "Emil Zegadłowicz", y: "1935", n: "awang", img: null, h: 280, d: "Zegadłowicz był przedstawicielem <b>ekspresjonizmu</b> — nurtu wyrażającego silne emocje i bunt. „Zmory”, powieść o dojrzewaniu, wywołały skandal obyczajowy." },
+  { t: "Ferdydurke", a: "Witold Gombrowicz", y: "1937", n: "grot", img: "ferdydurke", h: 310, d: "<b>Groteskowa</b> powieść o dorosłym Józiu, którego „upupia” się, cofając do szkolnej ławki. Gombrowicz wyśmiewa schematy, w które wtłacza nas szkoła, rodzina i społeczeństwo." },
+  { t: "Sklepy cynamonowe", a: "Bruno Schulz", y: "1934", n: "grot", img: "sklepy", h: 260, d: "Opowiadania z Drohobycza, w których zwykły świat zamienia się w mit i baśń. Schulz był też grafikiem — sam ilustrował swoje książki." },
+  { t: "Szewcy", a: "Stanisław Ignacy Witkiewicz", y: "1931–1934", n: "grot", img: "witkacy", h: 300, d: "Witkacy — pisarz, malarz, filozof, fotograf — był głosicielem <b>katastrofizmu</b>: przeczuwał upadek cywilizacji i nadejście systemów totalitarnych. W groteskowych dramatach przedstawiał świat, który się rozpada." },
+  { t: "Kariera Nikodema Dyzmy", a: "Tadeusz Dołęga-Mostowicz", y: "1932", n: "pop", img: "dyzma", h: 320, d: "Satyra na polityczne elity: przypadkowy człowiek bez kwalifikacji robi błyskawiczną karierę. Dołęga-Mostowicz był najpoczytniejszym autorem <b>literatury popularnej</b> — pisał też „Znachora”." },
+  { t: "Skamander", a: "Tuwim, Słonimski, Lechoń, Iwaszkiewicz, Wierzyński", y: "od 1918", n: "poez", img: "skamander", h: 290, d: "Grupa poetycka <b>Skamander</b> łączyła poezję z codziennością i językiem ulicy. <b>Julian Tuwim</b> pisał też wiersze dla dzieci, skecze kabaretowe i piosenki." },
+  { t: "Awangarda Krakowska", a: "Tadeusz Peiper i in.", y: "od 1922", n: "poez", img: "peiper", h: 240, d: "Grupa skupiona wokół <b>Tadeusza Peipera</b> i pisma „Zwrotnica”. Jej hasło to „miasto, masa, maszyna” — poezja miała być nowoczesna jak cywilizacja techniczna." },
+  { t: "Biblioteka Boya", a: "Tadeusz Boy-Żeleński", y: "przekłady", n: "pop", img: "boy", h: 270, d: "Boy przetłumaczył na polski ponad 100 dzieł literatury francuskiej — od Moliera po Prousta. Był też felietonistą i krytykiem, a jego teksty czytano w „Wiadomościach Literackich”." }
+];
+
+const ART = [
+  { img: "dwieglowy", ttl: "Stanisław Ignacy Witkiewicz, „Dwie głowy”", ans: "formizm", exp: "<b>Formizm</b> — pierwszy polski nurt awangardowy (1917–1922). Łączył kubizm, ekspresjonizm i motywy ludowe. Należeli do niego m.in. Witkacy, Leon Chwistek i Zbigniew Pronaszko." },
+  { img: "wyspa", ttl: "Zygmunt Waliszewski, „Wyspa miłości”", ans: "kapizm", exp: "<b>Kapizm</b> (od skrótu KP — Komitet Paryski) to polski <b>koloryzm</b>: dla jego twórców najważniejszy był kolor. Kapiści, m.in. Jan Cybis, Józef Czapski i Waliszewski, kształcili się w Paryżu." },
+  { img: "gdynia", ttl: "Dworzec Morski w Gdyni, 1933", ans: "modernizm", exp: "W latach 30. dominowały <b>funkcjonalizm i modernizm</b>: proste bryły, płaskie dachy, brak zdobień. Najlepszym przykładem jest zabudowa <b>Gdyni</b> — nowego portu i miasta." }
+];
+const ART_OPTS = ["formizm", "kapizm", "modernizm", "styl dworkowy"];
+const PEOPLE = [
+  { img: "witkacy", n: "Stanisław Ignacy Witkiewicz (Witkacy)", d: "Malarz-formista; prowadził „Firmę Portretową”. Na zdjęciu tytułowym — jego portret filozofa Romana Ingardena." },
+  { img: "dunikowski", n: "Xawery Dunikowski", d: "Najwybitniejszy rzeźbiarz dwudziestolecia; tworzył pomniki i rzeźby monumentalne." },
+  { img: "pronaszko", n: "Zbigniew Pronaszko", d: "Malarz i rzeźbiarz, jeden z twórców formizmu." },
+  { img: "cybis", n: "Jan Cybis", d: "Malarz, czołowy przedstawiciel kapizmu (koloryzmu)." },
+  { img: "szymanowski", n: "Karol Szymanowski", d: "Kompozytor: balet <b>„Harnasie”</b> inspirowany muzyką górali, opera <b>„Król Roger”</b>." },
+  { img: "kiepura", n: "Jan Kiepura", d: "Tenor, gwiazda oper w Wiedniu, Mediolanie i Nowym Jorku oraz filmów muzycznych." },
+  { img: "osterwa", n: "Juliusz Osterwa", d: "Aktor i reżyser, twórca teatru Reduta — wystawiał polski repertuar romantyczny." },
+  { img: "schiller", n: "Leon Schiller", d: "Reżyser wielkich, monumentalnych inscenizacji dramatów romantycznych." }
+];
+
+const STATIONS = [
+  { id: "prasa", name: "Prasa", freq: "2700 tytułów", html: `
+    <div class="sv-grid"><div>
+      <ul>
+        <li>Pod koniec lat 30. ukazywało się w Polsce ok. <b>2700 tytułów</b> prasowych — dzienników, tygodników i miesięczników.</li>
+        <li>Obok poważnych gazet czytano tanią <b>prasę brukową</b> — sensacyjną, pełną kryminałów i plotek.</li>
+        <li>Powstawały pisma specjalistyczne: sportowe, kobiece, kulturalne — np. tygodnik <b>„Wiadomości Literackie”</b>.</li>
+        <li>Największym koncernem prasowym był krakowski <b>„Ilustrowany Kuryer Codzienny”</b> (IKC).</li>
+      </ul>
+      <div class="why"><b>Dlaczego masowa?</b>Prasa była dla większości mieszkańców II RP głównym źródłem informacji — także o sporcie, modzie i kinie.</div>
+    </div><div class="pics">
+      <figure class="tall"><img src="obrazy/ikc.jpg" alt="Ilustrowany Kuryer Codzienny"><figcaption>„IKC” z 31 sierpnia 1939 r.</figcaption></figure>
+      <figure class="tall"><img src="obrazy/skamander.jpg" alt="Miesięcznik Skamander"><figcaption>Miesięcznik „Skamander”, 1920 r.</figcaption></figure>
+    </div></div>` },
+  { id: "radio", name: "Radio", freq: "1926 · Raszyn 1931", html: `
+    <div class="sv-grid"><div>
+      <ul>
+        <li>Od <b>1926 r.</b> Polskie Radio nadawało regularny program. Powstawały rozgłośnie lokalne — m.in. w Krakowie, Lwowie, Wilnie i Poznaniu.</li>
+        <li>W <b>1931 r.</b> uruchomiono w <b>Raszynie</b> pod Warszawą stację nadawczą, która obejmowała zasięgiem ok. <b>90% powierzchni kraju</b>.</li>
+        <li>Na początku program nadawano tylko wieczorem; pod koniec lat 30. — przez cały dzień: muzyka, słuchowiska, wiadomości.</li>
+        <li>Rzesze słuchaczy przyciągały <b>relacje sportowe na żywo</b>. W 1939 r. radio miało ok. 1 mln abonentów.</li>
+      </ul>
+      <div class="why"><b>Dlaczego masowa?</b>Ten sam program w tej samej chwili słuchały setki tysięcy ludzi w całym kraju — w mieście i na wsi.</div>
+    </div><div>
+      <div class="note"><b>Radio było drugim — po prasie — środkiem masowego przekazu.</b> Odbiornik był jednak drogi, dlatego na wsi często słuchano go wspólnie, np. w świetlicy lub u sołtysa.</div>
+    </div></div>` },
+  { id: "kino", name: "Kino", freq: "1930 · film dźwiękowy", html: `
+    <div class="sv-grid"><div>
+      <ul>
+        <li>Na początku niepodległości kręcono filmy nieme. W <b>1930 r.</b> powstał pierwszy polski film dźwiękowy — <b>„Moralność pani Dulskiej”</b>.</li>
+        <li>Publiczność kochała <b>komedie i melodramaty</b> oraz ekranizacje powieści Dołęgi-Mostowicza (np. „Znachor”, 1937).</li>
+        <li>Aktorzy stali się gwiazdami, o których pisały gazety. <b>Pola Negri</b> (Apolonia Chałupiec) zrobiła karierę w Hollywood.</li>
+      </ul>
+      <div class="why"><b>Dlaczego masowa?</b>Bilet do kina był tani, a film oglądały tysiące widzów w całym kraju — wszyscy znali te same piosenki i aktorów.</div>
+    </div><div class="pics">
+      <figure class="tall"><img src="obrazy/dulska.jpg" alt="Plakat Moralność pani Dulskiej"><figcaption>Plakat „Moralności pani Dulskiej”, 1930</figcaption></figure>
+      <figure class="tall"><img src="obrazy/lucyna.jpg" alt="Kadr z filmu Czy Lucyna to dziewczyna?" style="object-position:30% 50%"><figcaption>Bodo i Smosarska w „Czy Lucyna to dziewczyna?”, 1934</figcaption></figure>
+    </div></div>
+    <div class="stars">
+      ${[["bodo","Eugeniusz Bodo","aktor, piosenkarz"],["smosarska","Jadwiga Smosarska","aktorka"],["ordonowna","Hanka Ordonówna","aktorka, piosenkarka"],["dymsza","Adolf Dymsza","aktor komediowy"],["negri","Pola Negri","gwiazda Hollywood"],["kiepura","Jan Kiepura","tenor, aktor"]].map(([i,n,r]) => `<div class="star"><img src="obrazy/${i}.jpg" alt="${n}"><b>${n}</b><span>${r}</span></div>`).join("")}
+    </div>` },
+  { id: "scena", name: "Kabaret", freq: "rewia · piosenka", html: `
+    <div class="sv-grid"><div>
+      <ul>
+        <li>Największe tłumy przyciągały <b>teatrzyki rewiowe i kabaretowe</b> — dowcipne skecze, piosenki i numery taneczne.</li>
+        <li>Najsłynniejszym warszawskim kabaretem był <b>Qui Pro Quo</b>, dla którego teksty pisał m.in. Julian Tuwim.</li>
+        <li>Występy odbywały się w salach teatralnych i w <b>kawiarniach</b>, ulubionym miejscu spotkań mieszkańców miast.</li>
+        <li>Przeboje śpiewali m.in. <b>Hanka Ordonówna</b>, <b>Eugeniusz Bodo</b> i <b>Mieczysław Fogg</b> — piosenki rozchodziły się dzięki płytom i radiu.</li>
+      </ul>
+      <div class="why"><b>Dlaczego masowa?</b>Rozrywka była lekka i przystępna — nie wymagała wykształcenia, a jej przeboje nucił cały kraj.</div>
+    </div><div class="pics">
+      <figure class="tall"><img src="obrazy/ordonowna.jpg" alt="Hanka Ordonówna"><figcaption>Hanka Ordonówna</figcaption></figure>
+      <figure class="tall"><img src="obrazy/fogg.jpg" alt="Mieczysław Fogg"><figcaption>Mieczysław Fogg</figcaption></figure>
+    </div></div>` },
+  { id: "sport", name: "Sport", freq: "Amsterdam 1928", html: `
+    <div class="sv-grid"><div>
+      <ul>
+        <li>W <b>1919 r.</b> powstał Polski Komitet Igrzysk Olimpijskich (patronat objął Józef Piłsudski) oraz <b>Polski Związek Piłki Nożnej</b>. Piłka nożna była jedną z najpopularniejszych dyscyplin.</li>
+        <li>W 1924 r. w Paryżu Polacy zdobyli pierwsze medale olimpijskie: srebrny i brązowy.</li>
+        <li><b>Halina Konopacka</b> zdobyła w <b>1928 r.</b> w Amsterdamie pierwsze polskie złoto olimpijskie — w rzucie dyskiem.</li>
+        <li><b>Janusz Kusociński</b> wygrał bieg na 10 km na igrzyskach w Los Angeles w <b>1932 r.</b> Narciarz <b>Stanisław Marusarz</b> był czterokrotnym olimpijczykiem.</li>
+      </ul>
+      <div class="why"><b>Dlaczego masowa?</b>Sport promowały władze i media — relacje radiowe i prasowe przeżywały miliony kibiców.</div>
+    </div><div class="pics">
+      <figure class="tall"><img src="obrazy/konopacka.jpg" alt="Halina Konopacka"><figcaption>Halina Konopacka</figcaption></figure>
+      <figure class="tall"><img src="obrazy/kusocinski.jpg" alt="Janusz Kusociński"><figcaption>Janusz Kusociński</figcaption></figure>
+    </div></div>` },
+  { id: "tv", name: "Telewizja", freq: "1938 · Prudential", html: `
+    <div class="sv-grid"><div>
+      <ul>
+        <li>II Rzeczpospolita była jednym z pierwszych państw, w których próbowano uruchomić telewizję.</li>
+        <li><b>5 października 1938 r.</b> z nadajnika na warszawskim wieżowcu <b>Prudential</b> nadano próbną audycję z występem <b>Mieczysława Fogga</b>.</li>
+        <li>Wyemitowano też film „Barbara Radziwiłłówna” z Jadwigą Smosarską. Obraz można było odebrać w promieniu ok. 20 km.</li>
+        <li>Oficjalną emisję rozpoczęto w sierpniu 1939 r. — wybuch wojny przerwał rozwój telewizji w Polsce.</li>
+      </ul>
+      <div class="why"><b>Pytanie</b>Dlaczego telewizja nie zdążyła stać się w II RP środkiem masowego przekazu?</div>
+    </div><div class="pics">
+      <figure class="tall"><img src="obrazy/prudential.jpg" alt="Wieżowiec Prudential w Warszawie"><figcaption>Wieżowiec Prudential (dziś hotel), stan obecny</figcaption></figure>
+      <figure class="tall"><img src="obrazy/fogg.jpg" alt="Mieczysław Fogg"><figcaption>Mieczysław Fogg — pierwszy „występ telewizyjny”</figcaption></figure>
+    </div></div>` }
+];
+
+const PF = [
+  ["W zaborze pruskim odsetek analfabetów był znacznie niższy niż w rosyjskim.", true, "W zaborze pruskim od dawna obowiązywał przymus szkolny — analfabetów było ok. 4%, w rosyjskim ok. 60%."],
+  ["Reforma Grabskiego z 1924 r. zwiększyła liczbę szkół dla mniejszości narodowych.", false, "Ograniczyła ją i wprowadziła szkoły dwujęzyczne (utrakwistyczne)."],
+  ["Po reformie Jędrzejewicza szkoły średnie były bezpłatne i dostępne dla wszystkich.", false, "Szkoły średnie były płatne i miały elitarny charakter."],
+  ["Szyfr Enigmy złamał Marian Rejewski.", true, "Rejewski dokonał tego w 1932 r.; współpracowali z nim Zygalski i Różycki."],
+  ["Rudolf Weigl wynalazł szczepionkę przeciw tyfusowi plamistemu.", true, "Weigl pracował we Lwowie i był nominowany do Nagrody Nobla."],
+  ["Władysław Reymont otrzymał Nagrodę Nobla za „Przedwiośnie”.", false, "Reymont dostał Nobla za „Chłopów” (1924). „Przedwiośnie” napisał Stefan Żeromski."],
+  ["Bruno Jasieński był przedstawicielem futuryzmu.", true, "Futuryści zachwycali się techniką i prowokowali odbiorców."],
+  ["Witkacy był głosicielem katastrofizmu.", true, "Przewidywał upadek cywilizacji i nadejście systemów totalitarnych."],
+  ["Julian Tuwim należał do Awangardy Krakowskiej.", false, "Tuwim należał do grupy Skamander. Awangardą Krakowską kierował Tadeusz Peiper."],
+  ["Kapiści stawiali w malarstwie na pierwszym miejscu kolor.", true, "Kapizm to polski koloryzm."],
+  ["Pierwszym polskim filmem dźwiękowym była „Moralność pani Dulskiej”.", true, "Film miał premierę w 1930 r."],
+  ["Stacja nadawcza w Raszynie obejmowała zasięgiem ok. 90% powierzchni kraju.", true, "Uruchomiono ją w 1931 r."],
+  ["Pierwsze polskie złoto olimpijskie zdobył Janusz Kusociński.", false, "Pierwsze złoto zdobyła Halina Konopacka w 1928 r. Kusociński wygrał w 1932 r."],
+  ["Najlepszym przykładem modernizmu w polskiej architekturze jest zabudowa Gdyni.", true, "Gdynia powstała w dwudziestoleciu jako nowoczesne miasto portowe."]
+];
+
+/* Bank pytań do sprawdzianu indywidualnego: [pytanie, poprawna, błędne...] */
+const BANK = [
+  ["W którym zaborze odsetek analfabetów był najwyższy?", "Rosyjskim", "Pruskim", "Austriackim", "We wszystkich był podobny"],
+  ["Kiedy w odrodzonej Polsce wprowadzono powszechny obowiązek szkolny?", "W 1919 r.", "W 1924 r.", "W 1932 r.", "W 1935 r."],
+  ["Co wprowadziła reforma szkolna Stanisława Grabskiego?", "Szkoły dwujęzyczne (utrakwistyczne)", "Bezpłatne liceum dla wszystkich", "Obowiązkową maturę", "Getto ławkowe"],
+  ["Który minister przeprowadził w 1932 r. reformę ujednolicającą szkolnictwo?", "Janusz Jędrzejewicz", "Stanisław Grabski", "Ignacy Mościcki", "Eugeniusz Kwiatkowski"],
+  ["Jaki charakter miały szkoły średnie w II RP?", "Płatny i elitarny", "Bezpłatny i powszechny", "Wyłącznie wojskowy", "Wyłącznie zawodowy"],
+  ["Czym było getto ławkowe?", "Wyznaczaniem studentom-Żydom osobnych ławek w salach wykładowych", "Karą dla studentów za nieobecności", "Systemem stypendiów dla ubogich", "Ławkami dla studentek"],
+  ["Co oznacza łacińskie określenie „numerus clausus”?", "Liczba zamknięta", "Liczba nieparzysta", "Zamknięta uczelnia", "Pierwszy numer"],
+  ["Która instytucja koordynowała życie naukowe w II RP?", "Polska Akademia Umiejętności w Krakowie", "Polskie Radio", "Biuro Szyfrów", "Ministerstwo Spraw Wojskowych"],
+  ["Z jakim środowiskiem naukowym związany był Stefan Banach?", "Ze szkołą lwowską", "Ze szkołą krakowską", "Ze szkołą wileńską", "Ze szkołą gdańską"],
+  ["Jaką dziedzinę matematyki rozwinęli Banach i Steinhaus?", "Analizę funkcjonalną", "Geometrię euklidesową", "Statystykę wyborczą", "Kryptografię"],
+  ["Kto w 1932 r. złamał szyfr Enigmy?", "Marian Rejewski", "Stefan Banach", "Rudolf Weigl", "Ludwik Hirszfeld"],
+  ["Z czego słynie Ludwik Hirszfeld?", "Z badań nad grupami krwi", "Ze szczepionki przeciw tyfusowi", "Z konstrukcji samolotów", "Ze złamania Enigmy"],
+  ["Kto wynalazł szczepionkę przeciw tyfusowi plamistemu?", "Rudolf Weigl", "Ludwik Hirszfeld", "Hugo Steinhaus", "Stanisław Wigura"],
+  ["Na jakim samolocie Żwirko i Wigura wygrali zawody Challenge w 1932 r.?", "RWD-6", "PZL.37 Łoś", "Spitfire", "Fokker"],
+  ["Kto kierował zespołem, który zaprojektował bombowiec PZL.37 Łoś?", "Jerzy Dąbrowski", "Stanisław Rogalski", "Franciszek Żwirko", "Marian Rejewski"],
+  ["Za jakie dzieło Władysław Reymont otrzymał Nagrodę Nobla?", "„Chłopi”", "„Ziemia obiecana”", "„Przedwiośnie”", "„Noce i dnie”"],
+  ["Kto napisał „Przedwiośnie”?", "Stefan Żeromski", "Władysław Reymont", "Witold Gombrowicz", "Bruno Schulz"],
+  ["Kto jest autorem „Ferdydurke”?", "Witold Gombrowicz", "Bruno Schulz", "Zofia Nałkowska", "Julian Tuwim"],
+  ["Do jakiego nurtu należał Bruno Jasieński?", "Futuryzmu", "Ekspresjonizmu", "Kapizmu", "Skamandra"],
+  ["Kogo nazywamy głosicielem katastrofizmu w literaturze dwudziestolecia?", "Stanisława Ignacego Witkiewicza", "Tadeusza Dołęgę-Mostowicza", "Juliana Tuwima", "Marię Dąbrowską"],
+  ["Kto był najpopularniejszym autorem powieści sensacyjnych i romansów („Kariera Nikodema Dyzmy”)?", "Tadeusz Dołęga-Mostowicz", "Witold Gombrowicz", "Bruno Schulz", "Stefan Żeromski"],
+  ["Do której grupy poetyckiej należał Julian Tuwim?", "Skamandra", "Awangardy Krakowskiej", "Młodej Polski", "Formistów"],
+  ["Kto kierował Awangardą Krakowską?", "Tadeusz Peiper", "Julian Tuwim", "Tadeusz Boy-Żeleński", "Bruno Jasieński"],
+  ["Z czego słynął Tadeusz Boy-Żeleński?", "Z przekładów literatury francuskiej", "Z kompozycji baletowych", "Z rzeźb monumentalnych", "Z badań nad grupami krwi"],
+  ["Który kompozytor stworzył balet „Harnasie”?", "Karol Szymanowski", "Ludomir Różycki", "Jan Kiepura", "Mieczysław Fogg"],
+  ["Jaki nurt w malarstwie łączył kubizm, ekspresjonizm i motywy ludowe?", "Formizm", "Kapizm", "Impresjonizm", "Realizm socjalistyczny"],
+  ["Który kierunek dominował w architekturze lat 30.?", "Funkcjonalizm i modernizm", "Gotyk", "Barok", "Klasycyzm"],
+  ["Który film uznaje się za pierwszy polski film dźwiękowy?", "„Moralność pani Dulskiej”", "„Znachor”", "„Czy Lucyna to dziewczyna?”", "„Barbara Radziwiłłówna”"],
+  ["Jak naprawdę nazywała się Pola Negri, gwiazda Hollywood?", "Apolonia Chałupiec", "Jadwiga Smosarska", "Hanka Ordonówna", "Halina Konopacka"],
+  ["Od którego roku Polskie Radio nadawało regularny program?", "Od 1926 r.", "Od 1918 r.", "Od 1931 r.", "Od 1938 r."],
+  ["Gdzie w 1931 r. uruchomiono potężną stację nadawczą Polskiego Radia?", "W Raszynie", "W Gdyni", "W Krakowie", "W Wilnie"],
+  ["Kto wystąpił w pierwszej próbnej audycji telewizyjnej w 1938 r.?", "Mieczysław Fogg", "Jan Kiepura", "Eugeniusz Bodo", "Adolf Dymsza"],
+  ["Kto zdobył pierwszy złoty medal olimpijski dla Polski?", "Halina Konopacka", "Janusz Kusociński", "Stanisław Marusarz", "Franciszek Żwirko"],
+  ["W jakiej konkurencji Janusz Kusociński zdobył złoto olimpijskie w 1932 r.?", "W biegu na 10 km", "W rzucie dyskiem", "W skokach narciarskich", "W boksie"],
+  ["Jaki konkurs muzyczny zorganizowano po raz pierwszy w 1935 r.?", "Konkurs Skrzypcowy im. Henryka Wieniawskiego", "Konkurs Chopinowski", "Festiwal w Opolu", "Warszawską Jesień"]
+];
+/* Wielokrotny wybór: [polecenie, [opcja, czy poprawna]...] */
+const MULTI = [
+  ["Zaznacz przejawy kultury masowej w Polsce międzywojennej.", [["Komedie i melodramaty filmowe", 1], ["Audycje Polskiego Radia", 1], ["Prasa brukowa", 1], ["Sejmiki szlacheckie", 0], ["Rewie i kabarety", 1]]],
+  ["Zaznacz osoby związane z polską matematyką lub kryptologią.", [["Stefan Banach", 1], ["Hugo Steinhaus", 1], ["Marian Rejewski", 1], ["Karol Szymanowski", 0], ["Eugeniusz Bodo", 0]]],
+  ["Zaznacz członków grupy poetyckiej Skamander.", [["Julian Tuwim", 1], ["Kazimierz Wierzyński", 1], ["Antoni Słonimski", 1], ["Tadeusz Peiper", 0], ["Bruno Schulz", 0]]],
+  ["Zaznacz gwiazdy kina międzywojennego.", [["Eugeniusz Bodo", 1], ["Jadwiga Smosarska", 1], ["Hanka Ordonówna", 1], ["Rudolf Weigl", 0], ["Stanisław Wigura", 0]]],
+  ["Zaznacz problemy polskiego szkolnictwa w okresie międzywojennym.", [["Wysoki odsetek analfabetów", 1], ["Płatne, elitarne szkoły średnie", 1], ["Różnice w szkolnictwie dawnych zaborów", 1], ["Brak jakichkolwiek uczelni wyższych", 0]]],
+  ["Zaznacz nurty i zjawiska w polskiej sztuce dwudziestolecia.", [["Formizm", 1], ["Kapizm", 1], ["Modernizm w architekturze", 1], ["Gotyk", 0], ["Barok", 0]]]
+];
+/* Dopasowanie: twórca ↔ osiągnięcie */
+const MATCH = [
+  ["Stefan Banach", "analiza funkcjonalna"],
+  ["Marian Rejewski", "złamanie szyfru Enigmy"],
+  ["Ludwik Hirszfeld", "badania nad grupami krwi"],
+  ["Rudolf Weigl", "szczepionka przeciw tyfusowi plamistemu"],
+  ["Władysław Reymont", "Nagroda Nobla za „Chłopów”"],
+  ["Witold Gombrowicz", "powieść „Ferdydurke”"],
+  ["Bruno Schulz", "opowiadania „Sklepy cynamonowe”"],
+  ["Karol Szymanowski", "balet „Harnasie”"],
+  ["Halina Konopacka", "złoto olimpijskie w rzucie dyskiem"],
+  ["Tadeusz Dołęga-Mostowicz", "powieść „Kariera Nikodema Dyzmy”"],
+  ["Jerzy Dąbrowski", "bombowiec PZL.37 Łoś"],
+  ["Tadeusz Boy-Żeleński", "przekłady literatury francuskiej"]
+];
+/* Odpowiedź wpisywana: [polecenie, [akceptowane odpowiedzi]] */
+const TEXTQ = [
+  ["Wpisz nazwisko pisarza, który w 1924 r. otrzymał Nagrodę Nobla.", ["reymont", "wladyslaw reymont", "władysław reymont"]],
+  ["Jak nazywała się niemiecka maszyna szyfrująca, której szyfr złamali polscy kryptolodzy?", ["enigma"]],
+  ["Wpisz nazwę miejscowości pod Warszawą, w której w 1931 r. uruchomiono stację nadawczą Polskiego Radia.", ["raszyn", "raszynie"]],
+  ["Wpisz nazwę grupy poetyckiej, do której należał Julian Tuwim.", ["skamander"]],
+  ["W którym roku Polskie Radio rozpoczęło regularne nadawanie? Wpisz rok.", ["1926"]],
+  ["Wpisz nazwisko ministra, który w 1932 r. przeprowadził reformę szkolnictwa.", ["jedrzejewicz", "janusz jedrzejewicz"]],
+  ["Wpisz nazwę miasta, którego zabudowa jest najlepszym przykładem polskiego modernizmu.", ["gdynia", "gdyni"]]
+];
+/* Skład sprawdzianu: typ → liczba zadań (razem 15) */
+const TEST_PLAN = { mc: 6, tf: 3, multi: 2, order: 1, match: 1, text: 2 };
+const TYPE_HINT = {
+  mc: "Wybierz jedną odpowiedź",
+  tf: "Prawda czy fałsz?",
+  multi: "Zaznacz wszystkie poprawne odpowiedzi",
+  order: "Dotykaj wydarzeń od najwcześniejszego do najpóźniejszego",
+  match: "Dopasuj twórcę do osiągnięcia",
+  text: "Wpisz odpowiedź"
+};
+const Q_COUNT = Object.values(TEST_PLAN).reduce((a, b) => a + b, 0);
+/* Skala ocen: [minimalna liczba punktów, ocena, nazwa] */
+const GRADES = [[14, 6, "celujący"], [12, 5, "bardzo dobry"], [10, 4, "dobry"], [7, 3, "dostateczny"], [5, 2, "dopuszczający"], [0, 1, "niedostateczny"]];
+const TEST_KEY = "kult2rp-test", TAB_KEY = "kult2rp-tab", TEST_NAME = "Kultura i nauka II RP";
+
+/* =========================================================
+   NARZĘDZIA
+   ========================================================= */
+const $ = (s, r = document) => r.querySelector(s);
+const el = (tag, cls, html) => { const e = document.createElement(tag); if (cls) e.className = cls; if (html != null) e.innerHTML = html; return e; };
+const shuffle = a => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const store = {
+  get(k) { try { return JSON.parse(localStorage.getItem(k)); } catch (e) { return null; } },
+  set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} },
+  del(k) { try { localStorage.removeItem(k); } catch (e) {} }
+};
+function gradeFor(score, total) {
+  const p = Math.round(score / total * 100);
+  for (const [min, g, w] of GRADES) if (score >= min) return { p, g, w };
+}
+function todayStr(d = new Date()) {
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+}
+function checkCode(name, score, leaves, date) {
+  const s = `${name.trim().toLowerCase().replace(/\s+/g, " ")}|${score}|${leaves}|${date}|dwudziestolecie-1918`;
+  let h = 0x811c9dc5;
+  for (const ch of s) { h ^= ch.codePointAt(0); h = Math.imul(h, 0x01000193) >>> 0; }
+  const A = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+  let out = "";
+  for (let i = 0; i < 4; i++) { out += A[h % 32]; h = Math.floor(h / 32); }
+  return out;
+}
+
+/* Wspólny komponent quizu klasowego */
+function classQuiz(root, items, opts) {
+  let order = shuffle(items.map((_, i) => i)), i = 0, res = [];
+  function render() {
+    if (i >= order.length) {
+      const ok = res.filter(Boolean).length;
+      root.innerHTML = `<div class="quiz q-end"><div class="kicker">Wynik klasy</div><div class="big">${ok} / ${order.length}</div>
+        <p class="lead" style="margin:16px auto">${ok === order.length ? "Bezbłędnie — brawo!" : ok >= order.length * .7 ? "Bardzo dobrze. Wróćmy jeszcze do pomyłek." : "Warto powtórzyć ten fragment lekcji."}</p>
+        <button class="btn primary">Jeszcze raz</button></div>`;
+      $("button", root).onclick = () => { order = shuffle(order); i = 0; res = []; render(); };
+      return;
+    }
+    const it = items[order[i]], answered = res[i] !== undefined;
+    const choices = opts.choices(it);
+    root.innerHTML = `<div class="quiz">
+      <div class="q-top"><span>Pytanie <b>${i + 1}</b> z ${order.length}</span><span>Poprawne odpowiedzi klasy: <b>${res.filter(Boolean).length}</b></span></div>
+      <div class="q-dots">${order.map((_, k) => `<i class="${k === i ? "cur" : res[k] === true ? "ok" : res[k] === false ? "bad" : ""}"></i>`).join("")}</div>
+      <div class="q-text">${esc(opts.text(it))}</div>
+      <div class="q-choices ${choices.length === 2 ? "two" : ""}">${choices.map(c => `<button class="choice">${esc(c)}</button>`).join("")}</div>
+      <div class="q-feedback" hidden></div>
+      <div class="q-nav"><button class="btn" data-n="prev" ${i === 0 ? "disabled" : ""}>← Wstecz</button><button class="btn primary" data-n="next" ${answered ? "" : "disabled"}>${i === order.length - 1 ? "Wynik" : "Dalej →"}</button></div>
+    </div>`;
+    const btns = [...root.querySelectorAll(".choice")];
+    const correct = opts.answer(it);
+    const show = (pick) => {
+      btns.forEach(b => { b.disabled = true; if (b.textContent === correct) b.classList.add("ok"); else if (b.textContent === pick) b.classList.add("bad"); });
+      const fb = $(".q-feedback", root), ok = pick === correct;
+      fb.hidden = false; fb.className = "q-feedback " + (ok ? "ok" : "bad");
+      fb.innerHTML = `<strong>${ok ? "Dobrze!" : "Niestety nie. Poprawnie: " + esc(correct) + "."}</strong> ${esc(opts.explain(it))}`;
+      $('[data-n="next"]', root).disabled = false;
+    };
+    if (answered) show(res[i] ? correct : (res["p" + i] || ""));
+    btns.forEach(b => b.onclick = () => { if (res[i] !== undefined) return; res[i] = b.textContent === correct; res["p" + i] = b.textContent; show(b.textContent); render(); });
+    $('[data-n="prev"]', root).onclick = () => { i--; render(); };
+    $('[data-n="next"]', root).onclick = () => { i++; render(); };
+  }
+  render();
+}
+
+/* =========================================================
+   TYPY ZADAŃ (sprawdzian indywidualny)
+   ========================================================= */
+const pickIdx = (n, len) => shuffle([...Array(len).keys()]).slice(0, n);
+function buildTest() {
+  const list = [];
+  pickIdx(TEST_PLAN.mc, BANK.length).forEach(qi => list.push({ t: "mc", qi, opts: shuffle([1, 2, 3, 4]) }));
+  pickIdx(TEST_PLAN.tf, PF.length).forEach(i => list.push({ t: "tf", i }));
+  pickIdx(TEST_PLAN.multi, MULTI.length).forEach(i => list.push({ t: "multi", i, opts: shuffle(MULTI[i][1].map((_, k) => k)) }));
+  for (let k = 0; k < TEST_PLAN.order; k++) list.push({ t: "order", ids: pickIdx(4, TIMELINE.length) });
+  for (let k = 0; k < TEST_PLAN.match; k++) { const ids = pickIdx(4, MATCH.length); list.push({ t: "match", ids, names: shuffle(ids) }); }
+  pickIdx(TEST_PLAN.text, TEXTQ.length).forEach(i => list.push({ t: "text", i }));
+  return shuffle(list);
+}
+const norm = s => s.toLowerCase().replace(/ł/g, "l").normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/[^a-z0-9]/g, "");
+function lev(a, b) {
+  const d = Array.from({ length: a.length + 1 }, (_, i) => [i]);
+  for (let j = 1; j <= b.length; j++) d[0][j] = j;
+  for (let i = 1; i <= a.length; i++) for (let j = 1; j <= b.length; j++)
+    d[i][j] = Math.min(d[i - 1][j] + 1, d[i][j - 1] + 1, d[i - 1][j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1));
+  return d[a.length][b.length];
+}
+// literówka (1 znak) jest wybaczana w dłuższych słowach, ale nie w liczbach
+const textOk = (given, accepted) => { const g = norm(given); return accepted.some(a => { a = norm(a); return g === a || (!/\d/.test(a) && a.length >= 6 && lev(g, a) <= 1); }); };
+
+const TASKS = {
+  mc(item) {
+    const q = BANK[item.qi]; let pick = null;
+    return {
+      text: q[0],
+      html: `<div class="st-choices">${item.opts.map((o, k) => `<button class="choice" data-o="${o}">${"ABCD"[k]}. ${esc(q[o])}</button>`).join("")}</div>`,
+      bind(r, refresh) { r.querySelectorAll(".choice").forEach(b => b.onclick = () => { r.querySelectorAll(".choice").forEach(x => x.classList.toggle("chosen", x === b)); pick = +b.dataset.o; refresh(); }); },
+      ready: () => pick != null, grade: () => pick === 1
+    };
+  },
+  tf(item) {
+    const q = PF[item.i]; let pick = null;
+    return {
+      text: q[0],
+      html: `<div class="st-choices tf"><button class="choice" data-v="1">Prawda</button><button class="choice" data-v="0">Fałsz</button></div>`,
+      bind(r, refresh) { r.querySelectorAll(".choice").forEach(b => b.onclick = () => { r.querySelectorAll(".choice").forEach(x => x.classList.toggle("chosen", x === b)); pick = b.dataset.v === "1"; refresh(); }); },
+      ready: () => pick != null, grade: () => pick === q[1]
+    };
+  },
+  multi(item) {
+    const m = MULTI[item.i], sel = new Set();
+    return {
+      text: m[0],
+      html: `<div class="st-choices">${item.opts.map(k => `<button class="choice check" data-k="${k}"><span class="box"></span>${esc(m[1][k][0])}</button>`).join("")}</div>`,
+      bind(r, refresh) { r.querySelectorAll(".choice").forEach(b => b.onclick = () => { const k = +b.dataset.k; sel.has(k) ? sel.delete(k) : sel.add(k); b.classList.toggle("chosen", sel.has(k)); refresh(); }); },
+      ready: () => sel.size > 0, grade: () => m[1].every(([, ok], k) => !!ok === sel.has(k))
+    };
+  },
+  order(item) {
+    const seq = [];
+    return {
+      text: "Ułóż wydarzenia w kolejności chronologicznej.",
+      html: `<div class="st-choices">${item.ids.map(id => `<button class="choice ord" data-id="${id}"><span class="badge"></span>${esc(TIMELINE[id].text)}</button>`).join("")}</div>
+             <button class="btn" data-clear style="margin-top:10px">Wyczyść kolejność</button>`,
+      bind(r, refresh) {
+        const paint = () => r.querySelectorAll(".ord").forEach(b => { const p = seq.indexOf(+b.dataset.id); b.classList.toggle("chosen", p >= 0); $(".badge", b).textContent = p >= 0 ? p + 1 : ""; });
+        r.querySelectorAll(".ord").forEach(b => b.onclick = () => { const id = +b.dataset.id, p = seq.indexOf(id); p >= 0 ? seq.splice(p, 1) : seq.push(id); paint(); refresh(); });
+        $("[data-clear]", r).onclick = () => { seq.length = 0; paint(); refresh(); };
+      },
+      ready: () => seq.length === item.ids.length,
+      grade: () => { const good = item.ids.slice().sort((a, b) => TIMELINE[a].y - TIMELINE[b].y); return seq.every((id, k) => id === good[k]); }
+    };
+  },
+  match(item) {
+    let r0 = null;
+    return {
+      text: "Dopasuj każde osiągnięcie do właściwego twórcy.",
+      html: item.ids.map(id => `<div class="match-row"><div>${esc(MATCH[id][1])}</div><select data-id="${id}"><option value="">— wybierz —</option>${item.names.map(n => `<option value="${n}">${esc(MATCH[n][0])}</option>`).join("")}</select></div>`).join(""),
+      bind(r, refresh) { r0 = r; r.querySelectorAll("select").forEach(s => s.onchange = refresh); },
+      ready: () => [...r0.querySelectorAll("select")].every(s => s.value !== ""),
+      grade: () => [...r0.querySelectorAll("select")].every(s => s.value === s.dataset.id)
+    };
+  },
+  text(item) {
+    const q = TEXTQ[item.i]; let inp = null;
+    return {
+      text: q[0],
+      html: `<input class="st-input" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Twoja odpowiedź">`,
+      bind(r, refresh, submit) { inp = $("input", r); inp.oninput = refresh; inp.onkeydown = e => { if (e.key === "Enter") submit(); }; inp.focus(); },
+      ready: () => inp && inp.value.trim() !== "", grade: () => textOk(inp.value, q[1])
+    };
+  }
+};
+
+/* =========================================================
+   TRYB UCZNIA
+   ========================================================= */
+const STUDENT = /uczen/.test(location.hash) || /uczen/.test(location.search);
+if (STUDENT) initStudent(); else initTeacher();
+
+function initStudent() {
+  document.body.classList.add("student");
+  $("#teacher").hidden = true; $("#student").hidden = false;
+  if (/reset/.test(location.hash)) { store.del(TEST_KEY); history.replaceState(null, "", location.pathname + location.search + "#uczen"); }
+  const root = $("#st");
+  let S = store.get(TEST_KEY);
+  let clockTimer = null;
+
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden && S && !S.done && S.started) { S.leaves++; store.set(TEST_KEY, S); }
+    if (!document.hidden && S && !S.done && S.started) renderQ();
+  });
+
+  function startScreen() {
+    root.innerHTML = `
+      <div class="kicker">Sprawdzian · ${TEST_NAME}</div>
+      <h2>Zanim zaczniesz</h2>
+      <div class="card" style="margin:14px 0">
+        <ul style="margin:0;padding-left:20px">
+          <li>${Q_COUNT} zadań różnego typu: wybór odpowiedzi, prawda/fałsz, kolejność wydarzeń, dopasowanie i odpowiedzi wpisywane.</li>
+          <li>Każde zadanie to 1 punkt — liczy się tylko w całości poprawna odpowiedź.</li>
+          <li>Nie można wrócić do poprzedniego zadania.</li>
+          <li><b>Nie opuszczaj tej strony</b> — każde przełączenie aplikacji jest zapisywane i widoczne dla nauczyciela.</li>
+          <li>Na końcu pokaż ekran z wynikiem nauczycielowi.</li>
+        </ul>
+      </div>
+      <div class="field"><label for="sName">Imię i nazwisko</label><input id="sName" autocomplete="off"></div>
+      <div class="field"><label for="sClass">Klasa</label><input id="sClass" autocomplete="off"></div>
+      <button class="btn primary" id="sGo" style="width:100%;padding:14px;font-size:18px">Rozpocznij</button>`;
+    $("#sGo").onclick = () => {
+      const name = $("#sName").value.trim(), cls = $("#sClass").value.trim();
+      if (name.split(/\s+/).length < 2) { $("#sName").focus(); $("#sName").style.borderColor = "var(--bad)"; return; }
+      const qs = buildTest();
+      S = { name, cls, qs, ans: [], idx: 0, leaves: 0, started: Date.now(), done: false };
+      store.set(TEST_KEY, S); renderQ();
+    };
+  }
+
+  function renderQ() {
+    if (S.idx >= S.qs.length) return finish();
+    const item = S.qs[S.idx], type = item.t || "mc", task = TASKS[type](item);
+    root.innerHTML = `
+      ${S.leaves ? `<div class="warn">Zarejestrowane wyjścia ze strony: <b>${S.leaves}</b>. Nauczyciel zobaczy tę liczbę.</div>` : ""}
+      <div class="q-top"><span>Zadanie <b>${S.idx + 1}</b> z ${S.qs.length}</span><span>${esc(S.name)}</span></div>
+      <div class="progress"><i style="width:${S.idx / S.qs.length * 100}%"></i></div>
+      <div class="type-hint">${TYPE_HINT[type]}</div>
+      <div class="q-text">${esc(task.text)}</div>
+      <div class="task">${task.html}</div>
+      <button class="btn primary" id="sNext" disabled style="width:100%;padding:14px;margin-top:16px;font-size:18px">${S.idx === S.qs.length - 1 ? "Zakończ" : "Zatwierdź i dalej"}</button>`;
+    const next = $("#sNext"), refresh = () => { next.disabled = !task.ready(); };
+    task.bind($(".task", root), refresh, () => { if (task.ready()) next.click(); });
+    next.onclick = () => {
+      if (!task.ready()) return;
+      S.ans.push(task.grade()); S.idx++; store.set(TEST_KEY, S);
+      window.scrollTo(0, 0); renderQ();
+    };
+  }
+
+  function finish() {
+    if (!S.done) {
+      S.done = true; S.finished = Date.now(); S.score = S.ans.filter(Boolean).length; S.date = todayStr();
+      store.set(TEST_KEY, S);
+    }
+    const g = gradeFor(S.score, S.qs.length);
+    const mins = Math.max(1, Math.round((S.finished - S.started) / 60000));
+    const fin = new Date(S.finished);
+    root.innerHTML = `<div class="result">
+      <div class="kicker">Sprawdzian · ${TEST_NAME}</div>
+      <div class="seal"><div class="g">${g.g}</div><div class="gw">${g.w}</div></div>
+      <div class="who">${esc(S.name)}</div>
+      <div class="muted">${esc(S.cls || "")} · ukończono ${fin.toLocaleTimeString("pl-PL", { hour: "2-digit", minute: "2-digit" })}, ${fin.toLocaleDateString("pl-PL")}</div>
+      <div class="stats">
+        <div><b>${S.score}/${S.qs.length}</b><small>punkty (${g.p}%)</small></div>
+        <div class="${S.leaves ? "alert" : ""}"><b>${S.leaves}</b><small>wyjścia ze strony</small></div>
+        <div><b>${mins} min</b><small>czas pisania</small></div>
+      </div>
+      <div class="ansrow">${S.ans.map((a, k) => `<i style="background:${a ? "var(--ok)" : "var(--bad)"}">${k + 1}</i>`).join("")}</div>
+      <div style="margin-top:10px">Kod kontrolny</div>
+      <div class="code-out">${checkCode(S.name, S.score, S.leaves, S.date)}</div>
+      <div class="clock" id="clock"></div>
+      <p class="muted" style="font-size:14px">Pokaż ten ekran nauczycielowi. Nie zamykaj strony.</p>
+    </div>`;
+    const tick = () => { const c = $("#clock"); if (c) c.textContent = new Date().toLocaleTimeString("pl-PL"); };
+    tick(); clearInterval(clockTimer); clockTimer = setInterval(tick, 1000);
+  }
+
+  if (!S) startScreen(); else if (S.done) finish(); else renderQ();
+}
+
+/* =========================================================
+   TRYB KLASY (NAUCZYCIEL)
+   ========================================================= */
+function initTeacher() {
+  const panels = [...document.querySelectorAll("section.panel")];
+  const tabs = $("#tabs");
+  let cur = 0;
+  panels.forEach((p, i) => {
+    const b = el("button", "", `<b>${i === 0 ? "◆" : i}</b>${p.dataset.label}`);
+    b.onclick = () => go(i); tabs.appendChild(b);
+    // ukryty etap (sprawdzian) — dostępny strzałką → z ostatniego etapu lub dwuklikiem w logo
+    if (p.dataset.hidden) b.hidden = true;
+    if (i > 0 && !p.dataset.hidden) {
+      const pb = el("button", "", `<span class="n">${i}</span><span class="t">${$("h2", p).textContent}</span><span class="m">${p.dataset.min || ""}</span>`);
+      pb.onclick = () => go(i); $("#plan").appendChild(pb);
+    }
+  });
+  function go(i) {
+    cur = Math.max(0, Math.min(panels.length - 1, i));
+    panels.forEach((p, k) => p.classList.toggle("active", k === cur));
+    [...tabs.children].forEach((b, k) => { b.classList.toggle("active", k === cur); if (panels[k].dataset.hidden) b.hidden = k !== cur; });
+    tabs.children[cur].scrollIntoView({ inline: "nearest", block: "nearest" });
+    store.set(TAB_KEY, panels[cur].dataset.hidden ? 0 : cur);
+    window.scrollTo(0, 0);
+  }
+  go(store.get(TAB_KEY) || 0);
+  $(".brand").addEventListener("dblclick", () => go(panels.findIndex(p => p.dataset.hidden)));
+  document.addEventListener("keydown", e => {
+    if (/INPUT|SELECT|TEXTAREA/.test(document.activeElement.tagName)) return;
+    if (e.key === "ArrowRight") go(cur + 1);
+    if (e.key === "ArrowLeft") go(cur - 1);
+  });
+  $("#fsBtn").onclick = () => document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen?.();
+  document.querySelectorAll("[data-reveal]").forEach(b => b.onclick = () => { const t = document.getElementById(b.dataset.reveal); t.hidden = !t.hidden; });
+
+  initIntro(); initTimeline(); initEducation(); initScience(); initBooks(); initArt(); initRadio(); initTest();
+  classQuiz($("#pfQuiz"), PF, { text: it => it[0], choices: () => ["Prawda", "Fałsz"], answer: it => it[1] ? "Prawda" : "Fałsz", explain: it => it[2] });
+}
+
+/* ---------- Wstęp ---------- */
+function initIntro() {
+  $("#faces").innerHTML = ["banach", "rejewski", "witkacy", "smosarska", "tuwim", "szymanowski", "konopacka", "bodo", "nalkowska", "kiepura"]
+    .map(k => `<img src="obrazy/${k}.jpg" alt="">`).join("");
+  $("#srcList").innerHTML = Object.values(window.SOURCES || {}).map(f => `<li>${esc(f.replace(/_/g, " "))}</li>`).join("");
+}
+
+/* ---------- Oś czasu ---------- */
+function initTimeline() {
+  const pool = $("#tlPool"), ladder = $("#tlLadder"), msg = $("#tlMsg");
+  const slots = {}, cards = {};
+  let selected = null;
+  TIMELINE.forEach((ev, i) => {
+    const r = el("div", "rung", `<span class="y">${ev.y}</span>`);
+    const s = el("div", "slot", "…"); s.dataset.y = ev.y; r.appendChild(s); ladder.appendChild(r); slots[ev.y] = s;
+    s.onclick = () => {
+      clearMarks();
+      if (selected != null) { place(selected, s); return; }
+      if (s.dataset.id) { const id = +s.dataset.id; delete s.dataset.id; s.textContent = "…"; s.classList.remove("filled"); pool.appendChild(cards[id]); cards[id].hidden = false; }
+    };
+    const c = el("button", "ev", esc(ev.text)); c.dataset.id = i; cards[i] = c;
+    c.onclick = () => { selected = selected === i ? null : i; Object.values(cards).forEach(x => x.classList.toggle("sel", +x.dataset.id === selected)); };
+  });
+  function place(id, slot) {
+    if (slot.dataset.id) { const old = +slot.dataset.id; cards[old].hidden = false; pool.appendChild(cards[old]); }
+    Object.values(slots).forEach(s => { if (s.dataset.id == id) { delete s.dataset.id; s.textContent = "…"; s.classList.remove("filled"); } });
+    slot.dataset.id = id; slot.textContent = TIMELINE[id].text; slot.classList.add("filled");
+    cards[id].hidden = true; cards[id].classList.remove("sel"); selected = null;
+  }
+  function clearMarks() { Object.values(slots).forEach(s => s.classList.remove("ok", "bad")); msg.hidden = true; }
+  function reset() {
+    clearMarks(); selected = null;
+    Object.values(slots).forEach(s => { delete s.dataset.id; s.textContent = "…"; s.classList.remove("filled"); });
+    shuffle(Object.values(cards)).forEach(c => { c.hidden = false; c.classList.remove("sel"); pool.appendChild(c); });
+  }
+  $("#tlReset").onclick = reset;
+  $("#tlSolve").onclick = () => { reset(); TIMELINE.forEach((ev, i) => place(i, slots[ev.y])); $("#tlCheck").click(); };
+  $("#tlCheck").onclick = () => {
+    let ok = 0, filled = 0;
+    Object.values(slots).forEach(s => { if (!s.dataset.id) return; filled++; const good = TIMELINE[+s.dataset.id].y == s.dataset.y; s.classList.add(good ? "ok" : "bad"); if (good) ok++; });
+    msg.hidden = false;
+    msg.innerHTML = filled === 0 ? "Najpierw dopasuj wydarzenia do lat." : `Poprawnie: <b>${ok} z ${TIMELINE.length}</b>. ${ok === TIMELINE.length ? "Znakomicie!" : "Czerwone pola wymagają poprawki — kliknij je, by zwolnić miejsce."}`;
+  };
+  reset();
+}
+
+/* ---------- Oświata ---------- */
+function initEducation() {
+  $("#barsShow").onclick = () => {
+    const bars = $("#bars");
+    bars.classList.add("shown");
+    bars.querySelectorAll(".fill").forEach(f => f.style.width = f.dataset.v + "%");
+    $("#barsNote").hidden = false;
+  };
+}
+
+/* ---------- Nauka ---------- */
+function initScience() {
+  const grid = $("#sciGrid"), chips = $("#sciChips");
+  SCIENCE.forEach(s => {
+    const c = el("button", "flip", `<div class="in">
+      <div class="f"><img src="obrazy/${s.img}.jpg" alt="${esc(s.name)}"><div class="nm"><small>${SCI_F[s.f]}</small>${esc(s.name)}</div><span class="hint">?</span></div>
+      <div class="b"><span class="tag">${SCI_F[s.f]}</span><h4>${s.h}</h4><p>${s.t}</p></div></div>`);
+    c.dataset.f = s.f;
+    c.onclick = () => c.classList.toggle("open");
+    grid.appendChild(c);
+  });
+  const all = el("button", "chip on", "Wszystkie");
+  const setF = f => { [...chips.children].forEach(x => x.classList.toggle("on", x.dataset.f === f)); grid.querySelectorAll(".flip").forEach(c => c.classList.toggle("hide", f !== "*" && c.dataset.f !== f)); };
+  all.dataset.f = "*"; all.onclick = () => setF("*"); chips.appendChild(all);
+  Object.entries(SCI_F).forEach(([k, v]) => { const b = el("button", "chip", v); b.dataset.f = k; b.onclick = () => setF(k); chips.appendChild(b); });
+  let open = false;
+  $("#flipAll").onclick = () => { open = !open; grid.querySelectorAll(".flip").forEach(c => c.classList.toggle("open", open)); $("#flipAll").textContent = open ? "Zakryj wszystkie" : "Odwróć wszystkie"; };
+}
+
+/* ---------- Literatura ---------- */
+function initBooks() {
+  const shelf = $("#shelf"), view = $("#bookView");
+  $("#legend").innerHTML = Object.values(NURTY).map(([n, c]) => `<span><i style="background:${c}"></i>${n}</span>`).join("");
+  BOOKS.forEach((b, i) => {
+    const [, col] = NURTY[b.n];
+    const s = el("button", "spine", `<span>${esc(b.t)}</span><small>${esc(b.a.split(",")[0].split(" ").slice(-1)[0])}</small>`);
+    s.style.height = b.h + "px"; s.style.background = `linear-gradient(90deg, ${col}, ${col}dd 60%, ${col})`; s.style.color = b.n === "pop" ? "#1a1006" : "#f4ead3";
+    s.onclick = () => {
+      shelf.querySelectorAll(".spine").forEach(x => x.classList.toggle("on", x === s));
+      view.innerHTML = `<div class="book">${b.img ? `<img src="obrazy/${b.img}.jpg" alt="">` : `<div style="width:170px;height:230px;background:${col};display:grid;place-items:center;color:#f4ead3;font-family:var(--display);font-size:22px;text-align:center;padding:10px">${esc(b.t)}</div>`}
+        <div><span class="tag" style="color:${col}">${NURTY[b.n][0]}</span><h3>${esc(b.t)}</h3><div class="au">${esc(b.a)} · ${esc(b.y)}</div><p>${b.d}</p></div></div>`;
+    };
+    shelf.appendChild(s);
+  });
+}
+
+/* ---------- Sztuka ---------- */
+function initArt() {
+  const grid = $("#artGrid");
+  ART.forEach(a => {
+    const c = el("div", "art card", `<div class="img"><img src="obrazy/${a.img}.jpg" alt="${esc(a.ttl)}"></div>
+      <div class="credit">${esc(a.ttl)}</div><div class="ask">Jaki to nurt lub styl?</div>
+      <div class="opts">${ART_OPTS.map(o => `<button>${o}</button>`).join("")}</div><div class="exp">${a.exp}</div>`);
+    c.querySelectorAll(".opts button").forEach(b => b.onclick = () => {
+      if (c.classList.contains("done")) return;
+      c.classList.add("done");
+      c.querySelectorAll(".opts button").forEach(x => { if (x.textContent === a.ans) x.classList.add("ok"); else if (x === b) x.classList.add("bad"); });
+    });
+    grid.appendChild(c);
+  });
+  $("#artPeople").innerHTML = PEOPLE.map(p => `<div class="person"><img src="obrazy/${p.img}.jpg" alt=""><div><b>${esc(p.n)}</b><span>${p.d}</span></div></div>`).join("");
+}
+
+/* ---------- Kultura masowa: radio ---------- */
+function initRadio() {
+  const st = $("#stations"), view = $("#stationView"), needle = $("#needle");
+  $("#scale").innerHTML = STATIONS.map(s => `<span>${s.name}</span>`).join("");
+  let turns = 0;
+  const tune = (i) => {
+    const s = STATIONS[i];
+    [...st.children].forEach((b, k) => b.classList.toggle("on", k === i));
+    const spans = $("#scale").children, dial = $(".dial"), r = spans[i].getBoundingClientRect(), d = dial.getBoundingClientRect();
+    needle.style.left = (r.left + r.width / 2 - d.left - 1.5) + "px";
+    turns += 120; $("#knobR").style.transform = `rotate(${turns}deg)`;
+    view.innerHTML = `<div class="sv"><div class="sv-head"><h3>${s.name}</h3><span class="freq">${s.freq}</span></div>${s.html}</div>`;
+  };
+  STATIONS.forEach((s, i) => { const b = el("button", "", s.name); b.onclick = () => tune(i); st.appendChild(b); });
+  // pierwsza stacja po pokazaniu panelu (wtedy znamy wymiary skali)
+  const obs = new MutationObserver(() => { if (st.closest(".panel").classList.contains("active") && !view.innerHTML) tune(0); });
+  obs.observe(st.closest(".panel"), { attributes: true, attributeFilter: ["class"] });
+  if (st.closest(".panel").classList.contains("active")) tune(0);
+  addEventListener("resize", () => { const on = [...st.children].findIndex(b => b.classList.contains("on")); if (on >= 0) { const spans = $("#scale").children, r = spans[on].getBoundingClientRect(), d = $(".dial").getBoundingClientRect(); needle.style.left = (r.left + r.width / 2 - d.left - 1.5) + "px"; } });
+}
+
+/* ---------- Sprawdzian (nauczyciel) ---------- */
+function initTest() {
+  const box = $("#qrBox");
+  const url = location.href.split("#")[0] + "#uczen";
+  if (/^https?:/.test(location.protocol) && !/localhost|127\.0\.0\.1/.test(location.hostname)) {
+    const q = el("div"); q.id = "qr"; box.appendChild(q);
+    if (window.QRCode) new QRCode(q, { text: url, width: 280, height: 280, correctLevel: QRCode.CorrectLevel.M });
+    else q.textContent = "Brak połączenia z internetem — nie można wygenerować kodu QR.";
+    box.appendChild(el("div", "url", esc(url)));
+  } else {
+    box.appendChild(el("div", "note", "Strona jest otwarta z dysku tego komputera, więc telefony uczniów nie mają do niej dostępu. Żeby działał kod QR, stronę trzeba opublikować w internecie (np. na GitHub Pages). Poniżej możesz podejrzeć, jak wygląda sprawdzian u ucznia."));
+  }
+  const prev = el("div", "btns"); prev.style.marginTop = "14px";
+  prev.innerHTML = `<a class="btn" href="${esc(url)}" target="_blank">Podgląd widoku ucznia</a>`;
+  box.appendChild(prev);
+
+  $("#vDate").value = todayStr();
+  const upd = () => {
+    const n = $("#vName").value.trim(), s = $("#vScore").value;
+    $("#vCode").textContent = n && s !== "" ? checkCode(n, +s, +$("#vLeaves").value || 0, $("#vDate").value) : "—";
+  };
+  ["#vName", "#vScore", "#vLeaves", "#vDate"].forEach(s => $(s).addEventListener("input", upd));
+
+  $("#gradeTable").innerHTML = GRADES.map(([min, g, w], i) => {
+    const lo = min, hi = i === 0 ? Q_COUNT : GRADES[i - 1][0] - 1;
+    return `<tr><td><b>${g}</b> — ${w}</td><td style="text-align:right">${lo === hi ? lo : lo + "–" + hi} pkt</td></tr>`;
+  }).join("");
+}
+</script>
+</body>
+</html>

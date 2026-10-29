@@ -1,0 +1,7 @@
+*
+!.gitignore
+!Kultura_i_nauka_II_RP_lekcja.html
+!obrazy/
+!obrazy/**
+!docs/
+!docs/**
